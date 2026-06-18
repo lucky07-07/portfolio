@@ -8,11 +8,21 @@ A modern, dark-themed personal portfolio built with React, Vite, and Tailwind CS
 
 ## Screenshots
 
-| Hero | Skills |
-|------|--------|
-| ![Hero Section](https://via.placeholder.com/600x340/0f0f10/f0c674?text=Hero+Section) | ![Skills Section](https://via.placeholder.com/600x340/0f0f10/f0c674?text=Skills+Section) |
+### Desktop
 
-> Replace the placeholders above with actual screenshots of your deployed site.
+![Desktop — Hero](screenshots/desktop-hero.png)
+
+| Skills | Projects |
+|--------|----------|
+| ![Skills](screenshots/desktop-skills.png) | ![Projects](screenshots/desktop-projects.png) |
+
+![Desktop — Education & Certifications](screenshots/desktop-education.png)
+
+### Mobile
+
+<p align="center">
+  <img src="screenshots/mobile-hero.png" alt="Mobile — Hero" width="320" />
+</p>
 
 ## Features
 
@@ -103,7 +113,6 @@ portfolio/
 - [ ] Add project detail pages with case studies
 - [ ] Integrate contact form with email service (Resend / EmailJS)
 - [ ] Add SEO meta tags and Open Graph images
-- [ ] Add mobile hamburger menu for navigation
 
 ## License
 
