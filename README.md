@@ -1,16 +1,110 @@
-# React + Vite
+# Anil Kumar — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, dark-themed personal portfolio built with React, Vite, and Tailwind CSS. Features smooth Framer Motion animations, a dashboard-style sidebar navigation, and a fully responsive layout.
 
-Currently, two official plugins are available:
+## Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Live:** [portfolio-phi-five-40.vercel.app](https://portfolio-phi-five-40.vercel.app)
 
-## React Compiler
+## Screenshots
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Hero | Skills |
+|------|--------|
+| ![Hero Section](https://via.placeholder.com/600x340/0f0f10/f0c674?text=Hero+Section) | ![Skills Section](https://via.placeholder.com/600x340/0f0f10/f0c674?text=Skills+Section) |
 
-## Expanding the ESLint configuration
+> Replace the placeholders above with actual screenshots of your deployed site.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- **Dashboard Layout** — Persistent sidebar navigation with section switching (no page reloads)
+- **Framer Motion Animations** — Smooth page transitions, hover effects, and scroll-triggered reveals
+- **Mouse Glow Effect** — Subtle cursor-following radial glow across the entire viewport
+- **Dark Theme with Gold Accents** — Cohesive `#0f0f10` / `#f0c674` color system
+- **Responsive Design** — Adapts from mobile (top nav) to desktop (sidebar + content)
+- **Component Sections** — Hero, About, Focus Areas, Skills, Projects, Education, Certifications, Contact
+- **Custom SVG Tech Logos** — Hand-crafted inline SVGs for Python, PyTorch, TensorFlow, Docker, and more
+- **Profile Photo Fallback** — Graceful degradation to initials if the profile image is missing
+
+## Tech Stack
+
+| Layer      | Technology                          |
+|------------|-------------------------------------|
+| Framework  | React 19                            |
+| Build Tool | Vite 7                              |
+| Styling    | Tailwind CSS 3                      |
+| Animation  | Framer Motion                       |
+| Icons      | Lucide React + Custom SVGs          |
+| Font       | Plus Jakarta Sans (Google Fonts)    |
+| Deployment | Vercel                              |
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/lucky07-07/portfolio.git
+cd portfolio
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Usage
+
+Open [http://localhost:5173](http://localhost:5173) in your browser. Use the sidebar (desktop) or top navigation (mobile) to switch between sections.
+
+To add your own profile photo, place a `profile.jpg` in the `public/` directory. To add a downloadable resume, place `resume.pdf` in `public/`.
+
+## Folder Structure
+
+```
+portfolio/
+├── public/
+│   ├── profile.jpg          # Profile photo
+│   └── vite.svg             # Favicon
+├── src/
+│   ├── components/
+│   │   ├── About.jsx        # About section with bio and skills
+│   │   ├── Certifications.jsx
+│   │   ├── Contact.jsx      # Email, LinkedIn, GitHub links
+│   │   ├── Education.jsx    # Academic background
+│   │   ├── FocusAreas.jsx   # Discipline tags grid
+│   │   ├── Footer.jsx       # Footer with external links
+│   │   ├── Hero.jsx         # Landing section with profile
+│   │   ├── MouseGlow.jsx    # Cursor-following glow effect
+│   │   ├── Navbar.jsx       # Top navigation bar
+│   │   ├── Projects.jsx     # Selected work cards
+│   │   ├── ScrollProgress.jsx
+│   │   └── Skills.jsx       # Tech stack with SVG logos
+│   ├── App.jsx              # Main layout + section router
+│   ├── index.css            # Global styles + card system
+│   └── main.jsx             # React entry point
+├── index.html
+├── tailwind.config.js
+├── vite.config.js
+├── postcss.config.js
+└── package.json
+```
+
+## Future Improvements
+
+- [ ] Add a blog section with MDX support
+- [ ] Integrate a headless CMS for dynamic project content
+- [ ] Add light/dark theme toggle
+- [ ] Implement page transition routing with React Router
+- [ ] Add project detail pages with case studies
+- [ ] Integrate contact form with email service (Resend / EmailJS)
+- [ ] Add SEO meta tags and Open Graph images
+- [ ] Add mobile hamburger menu for navigation
+
+## License
+
+MIT License — feel free to fork and customize for your own portfolio.
