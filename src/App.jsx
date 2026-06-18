@@ -71,7 +71,7 @@ function App() {
       <MouseGlow />
       <Navbar activeSection={activeSection} onNavigate={setActiveSection} />
 
-      <div className="pt-28 px-4 lg:px-6 pb-6 max-w-[1800px] mx-auto">
+      <div className="pt-20 sm:pt-28 px-3 sm:px-4 lg:px-6 pb-6 max-w-[1800px] mx-auto">
         <div className="flex gap-5">
 
           {/* LEFT SIDEBAR */}

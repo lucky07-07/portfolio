@@ -8,7 +8,7 @@ export default function Hero({ onNavigate }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
         >
-            <div className="futuristic-card p-6 lg:p-8 overflow-hidden relative">
+            <div className="futuristic-card p-4 sm:p-6 lg:p-8 overflow-hidden relative">
 
                 <div className="glow-orb glow-gold w-[260px] h-[260px] top-[-60px] right-0" />
                 <div className="glow-orb glow-soft w-[200px] h-[200px] bottom-[-50px] left-[8%]" />
@@ -29,7 +29,7 @@ export default function Hero({ onNavigate }) {
 
                         <h1 className="
                             mt-5
-                            text-[2.15rem] lg:text-[2.6rem]
+                            text-[1.75rem] sm:text-[2.15rem] lg:text-[2.6rem]
                             font-bold leading-[1.1] tracking-[-0.03em]
                             text-[#f5f5f5]
                         ">
@@ -76,7 +76,7 @@ export default function Hero({ onNavigate }) {
                             </a>
                         </div>
 
-                        <div className="mt-7 flex gap-8">
+                        <div className="mt-7 flex gap-6 sm:gap-8">
                             {[
                                 ["2+",  "Years Building"  ],
                                 ["10+", "Projects"        ],
@@ -95,7 +95,7 @@ export default function Hero({ onNavigate }) {
                     <div className="relative flex justify-center items-center">
                         <motion.div
                             whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
-                            className="relative w-64 h-64 lg:w-72 lg:h-72 cursor-default group"
+                            className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-72 lg:h-72 cursor-default group"
                         >
                             <div className="
                                 absolute -inset-8 rounded-full

@@ -7,7 +7,7 @@ export default function About({ onNavigate }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
         >
-            <div className="futuristic-card p-6 lg:p-8 grid lg:grid-cols-2 gap-8 items-start">
+            <div className="futuristic-card p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-start">
 
                 {/* LEFT */}
                 <div>
@@ -16,7 +16,7 @@ export default function About({ onNavigate }) {
                     </p>
 
                     <div className="mt-3">
-                        <h2 className="text-[1.875rem] lg:text-[2.25rem] font-bold leading-[1.12] tracking-[-0.025em] text-[#f5f5f5]">
+                        <h2 className="text-[1.5rem] sm:text-[1.875rem] lg:text-[2.25rem] font-bold leading-[1.12] tracking-[-0.025em] text-[#f5f5f5]">
                             Data Scientist
                             <span className="block text-[#f0c674]">& ML Engineer</span>
                         </h2>
@@ -86,7 +86,7 @@ export default function About({ onNavigate }) {
                 </div>
 
                 {/* RIGHT */}
-                <div className="relative flex justify-center pt-2">
+                <div className="relative flex justify-center pt-2 hidden lg:flex">
                     <div className="absolute w-48 h-48 rounded-full bg-[#f0c674]/[0.04] blur-3xl" />
 
                     <div className="

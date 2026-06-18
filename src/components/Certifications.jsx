@@ -5,6 +5,11 @@ export default function Certifications() {
 
     const certs = [
         {
+            title: "AWS Certified Cloud Practitioner",
+            issuer: "Amazon Web Services (AWS)",
+            href: "https://www.linkedin.com/posts/anil-kumar-29884a17a_aws-certified-cloud-practitioner-was-issued-share-7464999106919239680-kZ9L",
+        },
+        {
             title: "Deep Learning Onramp",
             issuer: "MathWorks · MATLAB Academy",
             href: "https://matlabacademy.mathworks.com/",
@@ -34,7 +39,7 @@ export default function Certifications() {
             </div>
 
             {/* Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {certs.map((c, i) => (
                     <motion.div
                         key={i}

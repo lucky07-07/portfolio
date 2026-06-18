@@ -28,7 +28,7 @@ export default function FocusAreas() {
                 <h2 className="mt-2 text-[1.05rem] font-bold tracking-[-0.01em] text-[#f5f5f5]">Focus Areas</h2>
                 <div className="mt-2 w-7 h-[2px] rounded-full bg-[#f0c674]/50" />
 
-                <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {areas.map((area, index) => (
                         <motion.div
                             key={index}

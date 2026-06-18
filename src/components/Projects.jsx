@@ -14,7 +14,7 @@ export default function Projects() {
         {
             title: "KannadaCap",
             description:
-                "Image captioning for low-resource Kannada — built on a 225K MS COCO translation. Multi-architecture study across CNN-RNN, attention, and CLIP-based decoders with BERTScore back-translation evaluation.",
+                "Image captioning for low-resource Kannada — built on a 250K MS COCO translation. Multi-architecture study across CNN-RNN, attention, and CLIP-based decoders with BERTScore back-translation evaluation.",
             tech: ["PyTorch", "Transformers", "IndicTrans2", "CLIP", "BERTScore"],
             href: "https://github.com/lucky07-07",
         },

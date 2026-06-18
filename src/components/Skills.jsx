@@ -122,7 +122,7 @@ export default function Skills() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         {skillGroups.map((group, i) => (
           <motion.div
             key={group.id}
@@ -131,7 +131,7 @@ export default function Skills() {
             transition={{ duration: 0.35, delay: i * 0.06 }}
             viewport={{ once: true }}
             whileHover={{ y: -2, transition: { duration: 0.18 } }}
-            className="futuristic-card neon-hover p-5 flex flex-col gap-5"
+            className="futuristic-card neon-hover p-3 sm:p-5 flex flex-col gap-3 sm:gap-5"
           >
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-[#f0c674]/60 shrink-0" />
@@ -167,7 +167,7 @@ export default function Skills() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.25 }}
         viewport={{ once: true }}
-        className="mt-4 futuristic-card px-5 py-3 flex items-center gap-4"
+        className="mt-4 futuristic-card px-4 sm:px-5 py-3 flex flex-wrap items-center gap-3 sm:gap-4"
       >
         <span className="text-[9px] uppercase tracking-[0.3em] text-[#9f9f9f] shrink-0 whitespace-nowrap">
           All tools

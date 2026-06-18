@@ -33,7 +33,7 @@ export default function Education() {
                 </h2>
             </div>
 
-            <div className="grid xl:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {education.map((item, i) => (
                     <motion.div
                         key={i}
