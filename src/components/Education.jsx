@@ -7,13 +7,13 @@ export default function Education() {
             degree: "M.Tech — Data Science",
             university: "Amrita Vishwa Vidyapeetham, Bengaluru",
             cgpa: "8.16",
-            year: "2024 — Present",
+            year: "2025 — Present",
         },
         {
             degree: "B.Tech — Computer Science",
             university: "Vel Tech R&D Institute, Chennai",
             cgpa: "7.44",
-            year: "2020 — 2024",
+            year: "2017 — 2021",
         },
     ];
 
