@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0f0f10;
+  color: #d1d1d1;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Very subtle warm tint — barely perceptible */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 15% 12%, rgba(240, 198, 116, 0.028), transparent),
+    radial-gradient(ellipse 55% 45% at 82% 85%, rgba(240, 198, 116, 0.018), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Smooth text selection */
+::selection {
+  background: rgba(240, 198, 116, 0.2);
+  color: #0f0f10;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0f0f10;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(240, 198, 116, 0.22);
+  border-radius: 999px;
+}
+
+/* ─── Typography utilities ───────────────────────── */
+.type-display {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.type-heading {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.type-subheading {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.type-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #f0c674;
+}
+
+.type-body {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #c8c8c8;
+}
+
+.type-meta {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #9f9f9f;
+}
+
+/* ─── Card system ─────────────────────────────────── */
+.futuristic-card {
+  background: #1e1e21;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  border-radius: 24px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.neon-hover {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.neon-hover:hover {
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ─── Glow orbs — very soft ──────────────────────── */
+.glow-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.07;
+  pointer-events: none;
+}
+.glow-green {
+  background: rgba(240, 198, 116, 0.35);
+}
+.glow-soft {
+  background: rgba(255, 255, 255, 0.08);
+}
+.glow-gold {
+  background: rgba(240, 198, 116, 0.35);
+}
+
+/* ─── Global button reset ─────────────────────────── */
+button {
+  transition: all 0.2s ease;
+}
+button:active {
+  transform: scale(0.98);
+}
