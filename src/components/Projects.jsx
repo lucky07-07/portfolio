@@ -7,16 +7,16 @@ export default function Projects() {
         {
             title: "AgroVision-7",
             description:
-                "Transformer ensemble for rice leaf disease classification on imbalanced agricultural data. 97.48% accuracy and 0.9750 macro-F1 across Swin, ViT, and ConvNeXt with Optuna-tuned ensemble weighting.",
-            tech: ["PyTorch", "ViT", "Swin", "ConvNeXt", "Optuna"],
-            href: "https://github.com/lucky07-07",
+                "A complete deep-learning study that classifies seven rice leaf conditions from RGB photographs — progressing from a weak imbalanced baseline to an Optuna-optimised, test-time-augmented transformer ensemble at 97.48 % accuracy.",
+            tech: ["PyTorch", "Transformers", "Test-Time Augmentation", "Fine Tuning", "Optuna"],
+            href: "https://github.com/lucky07-07/rice-leaf-disease-classification",
         },
         {
-            title: "KannadaCap",
+            title: "KIC-COCO-Kannada-Image-Captioning",
             description:
-                "Image captioning for low-resource Kannada — built on a 250K MS COCO translation. Multi-architecture study across CNN-RNN, attention, and CLIP-based decoders with BERTScore back-translation evaluation.",
-            tech: ["PyTorch", "Transformers", "IndicTrans2", "CLIP", "BERTScore"],
-            href: "https://github.com/lucky07-07",
+                "This project presents KIC-COCO (Kannada Image Captioning COCO), the first large-scale, standardized Kannada image-caption dataset, along with a comprehensive benchmark evaluation of six encoder-decoder architectures for automatic image captioning in Kannada.",
+            tech: ["PyTorch", "Transformers", "IndicTrans2", "CUDA", "BERTScore"],
+            href: "https://github.com/lucky07-07/KIC-COCO-Kannada-Image-Captioning",
         },
         {
             title: "GeoIntel-RT",
