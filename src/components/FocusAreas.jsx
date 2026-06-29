@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 
 export default function FocusAreas() {
 
@@ -7,7 +7,7 @@ export default function FocusAreas() {
         "Deep Learning",
         "Computer Vision",
         "Natural Language Processing",
-        "Full-Stack Engineering",
+        "Full-Stack AI Engineering",
         "API Design & Backend",
         "Generative AI",
         "Cloud & MLOps",

@@ -1,111 +1,158 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const TechLogos = {
-  Python: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <path d="M11.9 2C7.5 2 7.8 4 7.8 4l.01 2.1h4.3v.65H5.5S2 6.4 2 11s2.6 4.4 2.6 4.4h1.55v-2.1s-.08-2.6 2.5-2.6H13s2.5.05 2.5-2.4V4.3S16 2 11.9 2zm-2.2 1.25c.45 0 .82.36.82.8a.82.82 0 1 1-.82-.8z" fill="#3776AB"/>
-      <path d="M12.1 22c4.4 0 4.1-2 4.1-2l-.01-2.1h-4.3v-.65h6.61S22 17.6 22 13s-2.6-4.4-2.6-4.4h-1.55v2.1s.08 2.6-2.5 2.6H11s-2.5-.05-2.5 2.4v3.95S8 22 12.1 22zm2.2-1.25a.82.82 0 1 1 0-1.64.82.82 0 0 1 0 1.64z" fill="#FFD43B"/>
-    </svg>
-  ),
-  PyTorch: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <path d="M12.5 2L7 7.5a7.5 7.5 0 000 10.6 7.5 7.5 0 0010.6 0 7.5 7.5 0 000-10.6L16 9.1a3.5 3.5 0 010 4.95 3.5 3.5 0 01-4.95 0A3.5 3.5 0 0111 9.1l1.5-1.5V2zm1.7 3.4a.85.85 0 110 1.7.85.85 0 010-1.7z" fill="#EE4C2C"/>
-    </svg>
-  ),
-  TensorFlow: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <path d="M2 6.2L10.2 1.5v21l-3.3-1.9V8L2 11V6.2zm20 0l-8.2-4.7v8.2l8.2-4.8V6.2zm0 3.2L13.8 11v2.8l8.2-4.8V9.4zm0 5.5l-8.2 1.7v3.1l8.2-4.8v.1z" fill="#FF6F00"/>
-    </svg>
-  ),
-  HuggingFace: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <circle cx="12" cy="12" r="9" fill="#FFD21E"/>
-      <circle cx="9.5" cy="10" r="1" fill="#333"/>
-      <circle cx="14.5" cy="10" r="1" fill="#333"/>
-      <path d="M9.5 14.5c.7 1 4.5 1 5 0" stroke="#333" strokeWidth="1.1" strokeLinecap="round" fill="none"/>
-      <path d="M8.5 8C7.7 7 6.3 7 5.8 8.5" stroke="#333" strokeWidth=".9" strokeLinecap="round" fill="none"/>
-      <path d="M15.5 8c.8-1 2.2-1 2.7.5" stroke="#333" strokeWidth=".9" strokeLinecap="round" fill="none"/>
-    </svg>
-  ),
-  OpenCV: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <circle cx="12" cy="13.5" r="3" fill="#5C3EE8"/>
-      <path d="M12 7.5A6 6 0 006 13.5" stroke="#5C3EE8" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity=".55"/>
-      <circle cx="6.5" cy="7" r="2.5" fill="#EE4C2C"/>
-      <circle cx="17.5" cy="7" r="2.5" fill="#2FBF44"/>
-    </svg>
-  ),
-  spaCy: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <path d="M12 2.5L3.5 7.3v9.4L12 21.5l8.5-4.8V7.3L12 2.5z" fill="#09A3D5"/>
-      <path d="M12 7L8 9.3v5.4l4 2.3 4-2.3V9.3L12 7z" fill="none" stroke="white" strokeWidth="1" opacity=".35"/>
-    </svg>
-  ),
-  FastAPI: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <circle cx="12" cy="12" r="10" fill="#009688"/>
-      <path d="M13.5 5.5L9 13h5l-1.5 6.5 6.5-9.5H14l2.5-4.5h-3z" fill="white"/>
-    </svg>
-  ),
-  Docker: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="#2496ED">
-      <rect x="2.5" y="10.5" width="2.5" height="2" rx=".4"/>
-      <rect x="5.5" y="10.5" width="2.5" height="2" rx=".4"/>
-      <rect x="8.5" y="10.5" width="2.5" height="2" rx=".4"/>
-      <rect x="11.5" y="10.5" width="2.5" height="2" rx=".4"/>
-      <rect x="5.5" y="8" width="2.5" height="2" rx=".4"/>
-      <rect x="8.5" y="8" width="2.5" height="2" rx=".4"/>
-      <rect x="8.5" y="5.5" width="2.5" height="2" rx=".4"/>
-      <path d="M20.9 11.3c-.45-2.1-2.35-3.6-4.55-3.3-.3-1.2-1.1-2.1-2.1-2.7v1.55c.65.42 1.05 1.15 1.05 1.95v.45H5.2C5.2 13.3 6.7 15 9.1 15h8c1.9 0 3.5-1.55 3.8-3.7z"/>
-    </svg>
-  ),
-  AWS: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <path d="M7.1 10.8L5.9 14.5H5l2.4-6.8H8l2.5 6.8h-.9l-1.3-3.7H7.1zm-.15-1.1H8.6l-.38-1.1c-.18-.5-.32-.95-.42-1.38-.12.44-.27.9-.45 1.4l-.38 1.08z" fill="#FF9900"/>
-      <path d="M12.1 10.4l1.1 3.15 1.1-3.15h.82l-1.55 4.1h-.74l-1.55-4.1h.82z" fill="#FF9900"/>
-      <path d="M5.2 18.5C3.3 17.7 2 15.9 2 13.8c0-1.45.65-2.75 1.65-3.65V8.7C2 9.75 1 11.65 1 13.8c0 2.85 1.75 5.3 4.3 6.35L5.2 18.5zm13.6 0c1.9-.8 3.2-2.6 3.2-4.7 0-1.3-.5-2.5-1.4-3.4v1.35c.6.75.95 1.7.95 2.7 0 1.4-.72 2.65-1.85 3.4l.1 1.65z" fill="#FF9900"/>
-    </svg>
-  ),
-  MongoDB: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <path d="M12 2c-4.2 8-2 13.5 0 17 .45.72.72 1.42.72 2.05 0 .28-.22.45-.72.45v2.5h1.5v-2.5c-.5 0-.72-.17-.72-.45 0-.62.27-1.32.72-2.05C15.5 15.5 17.5 10 12 2z" fill="#47A248"/>
-    </svg>
-  ),
-  Kafka: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18">
-      <circle cx="12" cy="4.5" r="2" fill="#999"/>
-      <circle cx="4.5" cy="18.5" r="2" fill="#999"/>
-      <circle cx="19.5" cy="18.5" r="2" fill="#999"/>
-      <circle cx="12" cy="12.5" r="3.2" fill="none" stroke="#999" strokeWidth="1.4"/>
-      <line x1="12" y1="6.5" x2="12" y2="9.3" stroke="#999" strokeWidth="1.4"/>
-      <line x1="9.6" y1="15.1" x2="6.2" y2="17.1" stroke="#999" strokeWidth="1.4"/>
-      <line x1="14.4" y1="15.1" x2="17.8" y2="17.1" stroke="#999" strokeWidth="1.4"/>
-    </svg>
-  ),
-  React: () => (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-      <circle cx="12" cy="12" r="2.2" fill="#61DAFB"/>
-      <ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" strokeWidth="1.1"/>
-      <ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" strokeWidth="1.1" transform="rotate(60 12 12)"/>
-      <ellipse cx="12" cy="12" rx="10" ry="3.8" stroke="#61DAFB" strokeWidth="1.1" transform="rotate(120 12 12)"/>
-    </svg>
-  ),
-};
+// Logo sources: devicon (jsDelivr) + simple-icons CDN. Any that fail to load
+// fall back to a plain name tag (see SkillTile / CompactTile).
+const devicon = (path) =>
+  `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${path}`;
+const simple = (slug, color) =>
+  `https://cdn.simpleicons.org/${slug}${color ? `/${color}` : ""}`;
 
-const skillGroups = [
-  { id: "ml",       category: "Machine Learning", techs: ["Python", "PyTorch", "HuggingFace"] },
-  { id: "dl",       category: "Deep Learning",    techs: ["TensorFlow", "PyTorch", "Python"]  },
-  { id: "nlp",      category: "NLP & Vision",     techs: ["OpenCV", "spaCy", "HuggingFace"]  },
-  { id: "backend",  category: "Backend & Cloud",  techs: ["AWS", "Docker", "FastAPI"]         },
+// OpenAI has no usable colored CDN logo (it renders black on the dark card),
+// so render its mark inline in a light fill instead.
+function OpenAiMark({ size = 22 }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="#f5f5f5" aria-hidden="true">
+      <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z" />
+    </svg>
+  );
+}
+
+const categories = [
+  { id: "ml",       label: "Machine Learning" },
+  { id: "genai",    label: "Generative AI" },
+  { id: "cvnlp",    label: "Computer Vision & NLP" },
+  { id: "backend",  label: "Backend & Cloud" },
+  { id: "frontend", label: "Frontend" },
 ];
 
-const allTechs = [
-  "Python", "PyTorch", "TensorFlow", "HuggingFace",
-  "OpenCV", "spaCy", "FastAPI", "Docker",
-  "AWS", "MongoDB", "Kafka", "React",
+// Only skills with a usable logo are listed (LlamaIndex / YOLO removed — no logo).
+const skills = [
+  // Machine Learning
+  { name: "Python",       category: "ml",       logo: devicon("python/python-original.svg") },
+  { name: "PyTorch",      category: "ml",       logo: devicon("pytorch/pytorch-original.svg") },
+  { name: "TensorFlow",   category: "ml",       logo: devicon("tensorflow/tensorflow-original.svg") },
+  { name: "scikit-learn", category: "ml",       logo: devicon("scikitlearn/scikitlearn-original.svg") },
+
+  // Generative AI
+  { name: "Hugging Face", category: "genai",    logo: simple("huggingface", "FFD21E") },
+  { name: "OpenAI",       category: "genai",    logo: OpenAiMark },
+  { name: "LangChain",    category: "genai",    logo: simple("langchain", "FFFFFF") },
+
+  // Computer Vision & NLP
+  { name: "OpenCV",       category: "cvnlp",    logo: devicon("opencv/opencv-original.svg") },
+  { name: "spaCy",        category: "cvnlp",    logo: simple("spacy", "09A3D5") },
+
+  // Backend & Cloud
+  { name: "FastAPI",      category: "backend",  logo: devicon("fastapi/fastapi-original.svg") },
+  { name: "Docker",       category: "backend",  logo: devicon("docker/docker-original.svg") },
+  { name: "Kafka",        category: "backend",  logo: simple("apachekafka", "FFFFFF") },
+  { name: "PostgreSQL",   category: "backend",  logo: devicon("postgresql/postgresql-original.svg") },
+  { name: "MongoDB",      category: "backend",  logo: devicon("mongodb/mongodb-original.svg") },
+  { name: "AWS",          category: "backend",  logo: devicon("amazonwebservices/amazonwebservices-original-wordmark.svg") },
+  { name: "Git",          category: "backend",  logo: devicon("git/git-original.svg") },
+  { name: "Linux",        category: "backend",  logo: devicon("linux/linux-original.svg") },
+  { name: "CUDA",         category: "backend",  logo: simple("nvidia", "76B900") },
+
+  // Frontend
+  { name: "React",        category: "frontend", logo: devicon("react/react-original.svg") },
+  { name: "TypeScript",   category: "frontend", logo: devicon("typescript/typescript-original.svg") },
+  { name: "Tailwind CSS", category: "frontend", logo: simple("tailwindcss", "06B6D4") },
+  { name: "Vite",         category: "frontend", logo: devicon("vitejs/vitejs-original.svg") },
 ];
+
+// Full-size tile used in the filtered grid: logo + name, falling back to a tag.
+function SkillTile({ name, logo }) {
+  const [errored, setErrored] = useState(false);
+  const isComponent = typeof logo === "function";
+  const showLogo = logo && (isComponent || !errored);
+
+  if (!showLogo) {
+    return (
+      <div className="flex flex-col items-center justify-start">
+        <span className="text-[10px] text-[#d1d1d1] bg-white/[0.04] border border-white/[0.07] rounded-full px-3 py-2 whitespace-nowrap">
+          {name}
+        </span>
+      </div>
+    );
+  }
+
+  const LogoComp = isComponent ? logo : null;
+
+  return (
+    <div className="flex flex-col items-center gap-1.5">
+      <div className="
+        h-10 w-10 rounded-xl flex items-center justify-center
+        border border-white/[0.06] bg-white/[0.03]
+        hover:border-white/[0.10] hover:bg-white/[0.06]
+        transition-all duration-200 cursor-default
+      ">
+        {isComponent ? (
+          <LogoComp size={22} />
+        ) : (
+          <img
+            src={logo}
+            alt={name}
+            loading="lazy"
+            onError={() => setErrored(true)}
+            className="h-[22px] w-[22px] object-contain"
+          />
+        )}
+      </div>
+      <span className="text-[9px] text-[#9f9f9f] whitespace-nowrap">{name}</span>
+    </div>
+  );
+}
+
+// Compact icon used in the "All tools" strip: logo only, falling back to a tiny tag.
+function CompactTile({ name, logo }) {
+  const [errored, setErrored] = useState(false);
+  const isComponent = typeof logo === "function";
+  const showLogo = logo && (isComponent || !errored);
+
+  if (!showLogo) {
+    return (
+      <span
+        title={name}
+        className="h-7 px-2 rounded-lg flex items-center justify-center border border-white/[0.05] bg-white/[0.03] text-[8px] text-[#9f9f9f] whitespace-nowrap"
+      >
+        {name}
+      </span>
+    );
+  }
+
+  const LogoComp = isComponent ? logo : null;
+
+  return (
+    <div
+      title={name}
+      className="
+        h-7 w-7 rounded-lg flex items-center justify-center
+        border border-white/[0.05] bg-white/[0.03]
+        hover:bg-white/[0.06] hover:border-white/[0.09]
+        transition-all duration-200 cursor-default
+      "
+    >
+      {isComponent ? (
+        <LogoComp size={16} />
+      ) : (
+        <img
+          src={logo}
+          alt={name}
+          loading="lazy"
+          onError={() => setErrored(true)}
+          className="h-[16px] w-[16px] object-contain"
+        />
+      )}
+    </div>
+  );
+}
 
 export default function Skills() {
+  const [activeTab, setActiveTab] = useState("ml");
+
+  const visibleSkills = skills.filter((s) => s.category === activeTab);
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -122,46 +169,48 @@ export default function Skills() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
-        {skillGroups.map((group, i) => (
-          <motion.div
-            key={group.id}
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: i * 0.06 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -2, transition: { duration: 0.18 } }}
-            className="futuristic-card neon-hover p-3 sm:p-5 flex flex-col gap-3 sm:gap-5"
-          >
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#f0c674]/60 shrink-0" />
-              <span className="text-[11px] font-medium text-[#d1d1d1] tracking-wide">
-                {group.category}
-              </span>
-            </div>
-
-            <div className="flex items-start gap-3">
-              {group.techs.map((tech) => {
-                const Logo = TechLogos[tech];
-                return Logo ? (
-                  <div key={tech} className="flex flex-col items-center gap-1.5">
-                    <div className="
-                      h-10 w-10 rounded-xl flex items-center justify-center
-                      border border-white/[0.06] bg-white/[0.03]
-                      hover:border-white/[0.10] hover:bg-white/[0.06]
-                      transition-all duration-200 cursor-default
-                    ">
-                      <Logo />
-                    </div>
-                    <span className="text-[9px] text-[#9f9f9f] whitespace-nowrap">{tech}</span>
-                  </div>
-                ) : null;
-              })}
-            </div>
-          </motion.div>
-        ))}
+      {/* Category filter tabs (top) */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {categories.map((cat) => {
+          const isActive = activeTab === cat.id;
+          return (
+            <button
+              key={cat.id}
+              onClick={() => setActiveTab(cat.id)}
+              className={`
+                px-3 py-1.5 rounded-full border text-[11px] tracking-wide
+                transition-all duration-200
+                ${isActive
+                  ? "text-[#f0c674] bg-[#f0c674]/[0.07] border-[#f0c674]/20"
+                  : "text-[#c8c8c8] border-white/[0.06] hover:text-[#f0c674] hover:bg-white/[0.04] hover:border-white/[0.08]"
+                }
+              `}
+            >
+              {cat.label}
+            </button>
+          );
+        })}
       </div>
 
+      {/* Filtered skills grid */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="futuristic-card neon-hover p-4 sm:p-6"
+        >
+          <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-x-3 gap-y-5">
+            {visibleSkills.map((skill) => (
+              <SkillTile key={skill.name} name={skill.name} logo={skill.logo} />
+            ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* All tools strip (bottom) */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -174,23 +223,9 @@ export default function Skills() {
         </span>
         <div className="h-3 w-px bg-white/[0.07] shrink-0" />
         <div className="flex items-center gap-2 flex-wrap">
-          {allTechs.map((tech) => {
-            const Logo = TechLogos[tech];
-            return Logo ? (
-              <div
-                key={tech}
-                title={tech}
-                className="
-                  h-7 w-7 rounded-lg flex items-center justify-center
-                  border border-white/[0.05] bg-white/[0.03]
-                  hover:bg-white/[0.06] hover:border-white/[0.09]
-                  transition-all duration-200 cursor-default
-                "
-              >
-                <Logo />
-              </div>
-            ) : null;
-          })}
+          {skills.map((skill) => (
+            <CompactTile key={skill.name} name={skill.name} logo={skill.logo} />
+          ))}
         </div>
       </motion.div>
     </motion.section>

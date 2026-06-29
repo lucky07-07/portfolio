@@ -14,82 +14,90 @@ export default function Hero({ onNavigate }) {
                 <div className="glow-orb glow-soft w-[200px] h-[200px] bottom-[-50px] left-[8%]" />
 
                 <div className="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+<div>
 
-                    {/* LEFT */}
-                    <div>
+   <div
+    className="
+        inline-flex items-center gap-2
+        px-3.5 py-1.5 rounded-full
+        border border-[#f0c674]/20 bg-[#f0c674]/[0.07]
+        text-[#f0c674] text-[11px] tracking-[0.2em] font-medium
+    "
+>
+    AI/ ML · DATA SCIENTIST 
+</div>
 
-                        <div className="
-                            inline-flex items-center gap-2
-                            px-3.5 py-1.5 rounded-full
-                            border border-[#f0c674]/20 bg-[#f0c674]/[0.07]
-                            text-[#f0c674] text-[11px] tracking-[0.2em] font-medium
-                        ">
-                            DATA SCIENTIST · ML ENGINEER
-                        </div>
+<h1
+    className="
+        mt-5
+        text-[1.75rem] sm:text-[2.15rem] lg:text-[2.6rem]
+        font-bold leading-[1.1] tracking-[-0.03em]
+        text-[#f5f5f5]
+    "
+>
+    AI & Machine
+    <br />
+    Learning
+    <br />
+    <span className="text-[#f0c674]">
+        Engineer
+    </span>
+</h1>
 
-                        <h1 className="
-                            mt-5
-                            text-[1.75rem] sm:text-[2.15rem] lg:text-[2.6rem]
-                            font-bold leading-[1.1] tracking-[-0.03em]
-                            text-[#f5f5f5]
-                        ">
-                            Data Science &
-                            <br />
-                            Intelligent
-                            <br />
-                            <span className="text-[#f0c674]">Systems</span>
-                        </h1>
+<p className="mt-4 text-[#c8c8c8] text-[15px] leading-relaxed max-w-lg">
+    M.Tech Data Science student specializing in Deep Learning, Computer Vision,
+    NLP, Generative AI, and LLMs.
+</p>
+<div className="mt-6 flex flex-wrap gap-3">
+    <button
+        onClick={() => onNavigate("projects")}
+        className="
+            bg-[#f0c674] text-[#0f0f10]
+            px-6 py-2.5 rounded-[18px]
+            font-medium text-sm
+            hover:bg-[#e6b85c]
+            transition-colors duration-200
+        "
+    >
+        View Work
+    </button>
 
-                        <p className="mt-4 text-[#c8c8c8] text-[15px] leading-relaxed max-w-lg">
-                            Data Scientist and Machine Learning Engineer building deep learning systems
-                            end to end — from dataset to deployment. I work across computer vision, NLP,
-                            and generative AI in PyTorch, Transformers, and FastAPI.
-                        </p>
+    <a
+        href="/resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="
+            bg-white/[0.05]
+            border border-white/[0.08]
+            text-[#d1d1d1]
+            px-6 py-2.5 rounded-[18px]
+            text-sm
+            hover:bg-white/[0.08]
+            hover:border-white/[0.12]
+            transition-all duration-200
+        "
+    >
+        Resume
+    </a>
+</div>
+    <div className="mt-7 flex gap-8">
+        {[
+            ["10+", "Projects"],
+            ["20+", "Technologies"],
+            ["AI", "Focus"],
+        ].map(([value, label]) => (
+            <div key={label}>
+                <p className="text-[1.3rem] font-bold text-[#f5f5f5]">
+                    {value}
+                </p>
+                <p className="mt-0.5 text-xs text-[#c8c8c8]">
+                    {label}
+                </p>
+            </div>
+        ))}
+    </div>
 
-                        <p className="mt-2.5 text-[#9f9f9f] text-sm leading-relaxed max-w-lg">
-                            Research-grade rigor, production-grade delivery.
-                        </p>
-
-                        <div className="mt-6 flex flex-wrap gap-3">
-                            <button
-                                onClick={() => onNavigate("projects")}
-                                className="
-                                    bg-[#f0c674] text-[#0f0f10]
-                                    px-6 py-2.5 rounded-[18px] font-medium text-sm
-                                    hover:bg-[#e6b85c] transition-colors duration-200
-                                "
-                            >
-                                View Work
-                            </button>
-                            <a
-                                href="/resume.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="
-                                    bg-white/[0.05] border border-white/[0.08] text-[#d1d1d1]
-                                    px-6 py-2.5 rounded-[18px] text-sm
-                                    hover:bg-white/[0.08] hover:border-white/[0.12]
-                                    transition-all duration-200
-                                "
-                            >
-                                Resume
-                            </a>
-                        </div>
-
-                        <div className="mt-7 flex gap-6 sm:gap-8">
-                            {[
-                                ["2+",  "Years Building"  ],
-                                ["10+", "Projects"        ],
-                                ["15+", "Technologies"    ],
-                            ].map(([value, label]) => (
-                                <div key={label}>
-                                    <p className="text-[1.3rem] font-bold text-[#f5f5f5]">{value}</p>
-                                    <p className="mt-0.5 text-xs text-[#c8c8c8]">{label}</p>
-                                </div>
-                            ))}
-                        </div>
-
-                    </div>
+</div>
 
                     {/* RIGHT — profile */}
                     <div className="relative flex justify-center items-center">
