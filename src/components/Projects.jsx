@@ -8,29 +8,29 @@ export default function Projects() {
             title: "AgroVision-7",
             description:
                 "A complete deep-learning study that classifies seven rice leaf conditions from RGB photographs — progressing from a weak imbalanced baseline to an Optuna-optimised, test-time-augmented transformer ensemble at 97.48 % accuracy.",
-            tech: ["PyTorch", "Transformers", "Test-Time Augmentation", "Fine Tuning", "Optuna"],
+            tech: ["PyTorch", "ViT-B/16", "Swin-T", "ConvNeXt", "EfficientNet", "CBAM", "Optuna", "Grad-CAM", "Focal Loss", "CUDA", "timm"],
             href: "https://github.com/lucky07-07/rice-leaf-disease-classification",
         },
         {
             title: "KIC-COCO-Kannada-Image-Captioning",
             description:
                 "This project presents KIC-COCO (Kannada Image Captioning COCO), the first large-scale, standardized Kannada image-caption dataset, along with a comprehensive benchmark evaluation of six encoder-decoder architectures for automatic image captioning in Kannada.",
-            tech: ["PyTorch", "Transformers", "IndicTrans2", "CUDA", "BERTScore"],
+            tech:  ["PyTorch", "CLIP", "EfficientNet", "ConvNeXt", "Swin-T", "ViT", "IndicTrans2", "IndicBART", "BERTScore", "CUDA"],
             href: "https://github.com/lucky07-07/KIC-COCO-Kannada-Image-Captioning",
         },
         {
-            title: "GeoIntel-RT",
+            title: "Scalable Multi-Domain Geospatial Monitoring System",
             description:
-                "Real-time geospatial intelligence fusing satellite, aircraft, and weather streams. STGCN-based trajectory forecasting with anomaly detection at scale, served through a React dashboard.",
-            tech: ["Kafka", "PyTorch", "STGCN", "React", "Docker"],
-            href: "https://github.com/lucky07-07",
+                "A real-time geospatial intelligence platform that tracks satellites, aircraft, and weather from live public data sources, streams them through Kafka, persists them to PostGIS, visualizes them in a mode-switched dashboard, and layers a predictive ML service and a Spark analytics layer on top..",
+            tech: ["Kafka", "PyTorch", "PySpark", "React","PostgreSQL", "Docker"," FastAPI"],
+            href: "https://github.com/lucky07-07/geospatial-monitoring-system",
         },
         {
-            title: "Sustainable Cloud Computing",
+            title: "autonomous-carbon-k8s-scheduler",
             description:
-                "Research into energy-aware scheduling and compute-efficient training for cloud-scale ML workloads. Profiling, adaptive batching, and cost-performance analysis across distributed training configurations.",
-            tech: ["Python", "Docker", "AWS", "PyTorch", "Linux"],
-            href: "https://github.com/lucky07-07",
+                "lightweight autonomous AI agent that schedules Kubernetes workloads with explicit awareness of regional grid carbon intensity.",
+            tech: ["Python","PyTorch" ,"Docker", "LangGraph","langchain","FastAPI","Kubernetes", "Linux"],
+            href: "https://github.com/lucky07-07/autonomous-carbon-k8s-scheduler",
         },
     ];
 
