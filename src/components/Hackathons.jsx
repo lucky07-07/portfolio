@@ -13,8 +13,11 @@ export default function Hackathons() {
             />
 
             <div className="grid gap-6 lg:grid-cols-2">
-                {hackathons.map((h) => (
-                    <article key={h.event} className="panel panel-hover flex flex-col overflow-hidden p-7 sm:p-9">
+                {hackathons.map((h, i) => {
+                    // The top result leads as a full-width card with its headline stat on the right.
+                    const lead = i === 0;
+                    return (
+                    <article key={h.event} className={`panel panel-hover flex flex-col overflow-hidden p-7 sm:p-9 ${lead ? "lg:col-span-2" : ""}`}>
                         <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-rose/10 blur-[80px]" />
 
                         <div className="flex items-center justify-between gap-3">
@@ -24,11 +27,25 @@ export default function Hackathons() {
                             <span className="font-mono text-[12px] text-ink4">{h.year}</span>
                         </div>
 
+                        {lead ? (
+                            <div className="mt-6 flex flex-wrap items-end justify-between gap-8">
+                                <div className="max-w-xl">
+                                    <h3 className="text-[1.9rem] font-bold leading-tight sm:text-[2.3rem]">{h.event}</h3>
+                                    <p className="mt-2 font-mono text-[12.5px] text-rose">{h.track}</p>
+                                    <p className="mt-5 text-[16px] leading-[1.7] text-ink3">{h.summary}</p>
+                                </div>
+                                <div className="text-right">
+                                    <p className="font-display text-6xl font-bold leading-none text-grad sm:text-7xl">{h.stats[0].value}</p>
+                                    <p className="mt-2 font-mono text-[12px] text-ink4">{h.stats[0].label}</p>
+                                </div>
+                            </div>
+                        ) : (
+                        <>
                         <h3 className="mt-6 text-[1.6rem] font-bold leading-tight">{h.event}</h3>
                         <p className="mt-2 font-mono text-[12.5px] text-rose">{h.track}</p>
 
                         <p className="mt-5 text-[15.5px] leading-[1.7] text-ink3">
-                            <span className="text-ink">{h.project}.</span> {h.summary}
+                            {h.project && <span className="text-ink">{h.project}. </span>}{h.summary}
                         </p>
 
                         <div className="mt-7 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
@@ -39,8 +56,11 @@ export default function Hackathons() {
                                 </div>
                             ))}
                         </div>
+                        </>
+                        )}
 
                         <div className="flex-1 min-h-6" />
+                        {h.links.length > 0 && (
                         <div className="mt-6 flex flex-wrap gap-2">
                             {h.links.map((l) => (
                                 <a
@@ -54,8 +74,10 @@ export default function Hackathons() {
                                 </a>
                             ))}
                         </div>
+                        )}
                     </article>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

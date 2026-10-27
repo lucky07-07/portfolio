@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, FileText, Download, ChevronDown } from "lucide-react";
 import { profile } from "../data/portfolio";
-import { AttentionMatrix, TokenAttention } from "./AttentionViz";
+import { TokenAttention } from "./AttentionViz";
+import AskConsole from "./AskConsole";
 
 const ROLES = [
     "Computer Vision",
@@ -85,7 +86,7 @@ export default function Hero({ onNavigate }) {
                 </div>
 
                 {/* RIGHT */}
-                <AttentionMatrix />
+                <AskConsole onNavigate={onNavigate} />
             </div>
 
             {/* self-attention over a sentence */}

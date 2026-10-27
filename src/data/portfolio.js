@@ -236,6 +236,18 @@ export const papers = [
 // Hackathons and competitions.
 export const hackathons = [
     {
+        event: "Amazon ML Challenge 2026",
+        track: "National machine-learning challenge by Amazon",
+        format: "Challenge",
+        year: "2026",
+        summary:
+            "Competed in Amazon's annual ML challenge and finished in the top 3% of the leaderboard.",
+        stats: [
+            { value: "Top 3%", label: "leaderboard" },
+        ],
+        links: [],
+    },
+    {
         event: "Razorpay AI Buildathon 2026",
         track: "Track 02 · AI Risk Manager",
         format: "Buildathon",
