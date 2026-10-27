@@ -181,6 +181,16 @@ export const projects = [
 // Research papers (with thesis / poster where available).
 export const papers = [
     {
+        title: "Wildfire Occurrence Analysis Using Meteorological Data: A Comparative Study of Statistical Methods and Learning Models",
+        venue: "ICICT 2026 · 9th Int. Conf. on Inventive Computation Technologies",
+        status: "Published",
+        year: "2026",
+        area: "Applied ML · Climate",
+        summary:
+            "Compares classical statistical methods with machine-learning models for predicting wildfire occurrence from meteorological variables.",
+        links: [],
+    },
+    {
         title: "KIC-COCO: A Benchmark Dataset for Kannada Image Captioning and Architecture Comparison",
         venue: "ICMLDE 2026 · 5th Int. Conf. on Machine Learning and Data Engineering",
         status: "Under review",
@@ -219,6 +229,46 @@ export const papers = [
         links: [
             { label: "Paper", href: `${GH}/autonomous-carbon-k8s-scheduler/tree/main/paper` },
             { label: "Code", href: `${GH}/autonomous-carbon-k8s-scheduler` },
+        ],
+    },
+];
+
+// Hackathons and competitions.
+export const hackathons = [
+    {
+        event: "Razorpay AI Buildathon 2026",
+        track: "Track 02 · AI Risk Manager",
+        format: "Buildathon",
+        year: "2026",
+        project: "COD Return-Risk Scorer",
+        summary:
+            "Built and deployed a cost-sensitive risk scorer that flags cash-on-delivery orders likely to come back undelivered, with SHAP reasons and a plain-English action for the seller.",
+        stats: [
+            { value: "₹29.5K", label: "saved / 10K orders" },
+            { value: "0.806", label: "ROC-AUC" },
+            { value: "live", label: "FastAPI demo" },
+        ],
+        links: [
+            { label: "Live demo", href: "https://cod-return-risk-scorer.onrender.com/" },
+            { label: "Code", href: `${GH}/rto-return-risk-scorer` },
+        ],
+    },
+    {
+        event: "RSNA Knee Abnormality Detection",
+        track: "Kaggle research code competition",
+        format: "Competition",
+        year: "2026",
+        project: "Knee MRI Abnormality Detection",
+        summary:
+            "Detected 12 knee abnormalities from multi-series MRI using LLM-graded multilingual radiology reports as labels, under offline inference and a 9-hour runtime limit.",
+        stats: [
+            { value: "0.906", label: "private AUC" },
+            { value: "6,425", label: "teams" },
+            { value: "15", label: "model ensemble" },
+        ],
+        links: [
+            { label: "Competition", href: "https://www.kaggle.com/competitions/rsna-knee-abnormality-detection" },
+            { label: "Code", href: `${GH}/knee-mri-abnormality-detection` },
         ],
     },
 ];

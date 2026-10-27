@@ -9,27 +9,28 @@ export default {
     extend: {
 
       colors: {
-        // Neural / terminal palette
-        void:    "#05070d",
-        abyss:   "#0a0f1c",
-        panel:   "#0d1426",
-        line:    "rgba(148,163,184,0.12)",
+        // Attention-heatmap palette (magma-like: plum black → violet → rose → ember → gold)
+        void:    "#0b0910",
+        abyss:   "#120e19",
+        panel:   "#181221",
+        line:    "rgba(220,200,255,0.10)",
 
-        cyan:    "#22d3ee",
-        violet:  "#a78bfa",
-        signal:  "#34d399",
-        warn:    "#fbbf24",
+        ember:   "#ff8a4c",
+        rose:    "#f2508f",
+        violet:  "#9d7bff",
+        signal:  "#5eead4",
+        warn:    "#ffcc66",
 
-        ink:     "#e6edf7",
-        ink2:    "#b4bfd2",
-        ink3:    "#7d8aa3",
-        ink4:    "#4b5670",
+        ink:     "#f6f0fb",
+        ink2:    "#cfc5dd",
+        ink3:    "#9488aa",
+        ink4:    "#5f5475",
       },
 
       boxShadow: {
-        card:  "0 10px 40px -12px rgba(0,0,0,0.6)",
-        glow:  "0 0 0 1px rgba(34,211,238,0.25), 0 0 32px -6px rgba(34,211,238,0.35)",
-        glowV: "0 0 0 1px rgba(167,139,250,0.25), 0 0 32px -6px rgba(167,139,250,0.35)",
+        card:  "0 18px 50px -20px rgba(0,0,0,0.75)",
+        glow:  "0 0 0 1px rgba(255,138,76,0.3), 0 0 40px -8px rgba(255,138,76,0.45)",
+        glowV: "0 0 0 1px rgba(157,123,255,0.3), 0 0 40px -8px rgba(157,123,255,0.45)",
       },
 
       fontFamily: {

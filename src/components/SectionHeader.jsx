@@ -1,41 +1,41 @@
-const TOTAL_EPOCHS = 6;
+export const TOTAL_BLOCKS = 7;
 
-// Each section is framed as one layer of the network / one training epoch.
-const LAYER = {
-    about:     "Embedding(dim=512)",
-    projects:  "Conv2D(filters=9)",
-    research:  "MultiHeadAttention(heads=3)",
-    stack:     "Dense(units=42)",
-    education: "LayerNorm()",
-    contact:   "Softmax(→ you)",
+// Each section is one block of a transformer forward pass.
+const BLOCK = {
+    about:      "TokenEmbedding",
+    projects:   "MultiHeadAttention",
+    hackathons: "FeedForward",
+    research:   "CrossAttention",
+    stack:      "Add & LayerNorm",
+    education:  "PositionalEncoding",
+    contact:    "Softmax → you",
 };
 
-// Shared section heading: epoch counter, layer name, title and optional subtitle.
+// Shared section heading: block counter, block name, title and optional subtitle.
 export default function SectionHeader({ index, tag, title, subtitle, right }) {
-    const epoch = Number(index);
+    const n = Number(index);
 
     return (
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-6 sm:mb-14">
             <div>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px]">
-                    <span className="text-cyan">epoch {index}/{String(TOTAL_EPOCHS).padStart(2, "0")}</span>
-                    <span className="flex gap-[3px]" aria-hidden="true">
-                        {Array.from({ length: TOTAL_EPOCHS }, (_, i) => (
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[12px]">
+                    <span className="text-ember">block {index}/{String(TOTAL_BLOCKS).padStart(2, "0")}</span>
+                    <span className="flex gap-1" aria-hidden="true">
+                        {Array.from({ length: TOTAL_BLOCKS }, (_, i) => (
                             <span
                                 key={i}
-                                className={`h-1.5 w-4 rounded-sm ${i < epoch ? "bg-gradient-to-r from-cyan to-violet" : "bg-white/[0.07]"}`}
+                                className={`h-2 w-5 rounded-sm ${i < n ? "bg-gradient-to-r from-ember to-rose" : "bg-white/[0.07]"}`}
+                                style={i < n ? { opacity: 0.4 + (0.6 * (i + 1)) / n } : undefined}
                             />
                         ))}
                     </span>
-                    <span className="text-ink4">
-                        layer <span className="text-violet">{LAYER[tag] ?? tag}</span>
-                    </span>
+                    <span className="text-ink4">{BLOCK[tag] ?? tag}</span>
                 </div>
-                <h2 className="mt-3 text-[2rem] font-bold leading-tight sm:text-[2.6rem]">
+                <h2 className="mt-5 text-[2.2rem] font-bold leading-[1.05] tracking-[-0.03em] sm:text-[3rem]">
                     {title}
                 </h2>
                 {subtitle && (
-                    <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-ink3">{subtitle}</p>
+                    <p className="mt-4 max-w-2xl text-[16.5px] leading-[1.7] text-ink3">{subtitle}</p>
                 )}
             </div>
             {right}

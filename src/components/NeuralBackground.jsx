@@ -31,7 +31,7 @@ export default function NeuralBackground() {
                 vx: (Math.random() - 0.5) * 0.25,
                 vy: (Math.random() - 0.5) * 0.25,
                 r: Math.random() * 1.4 + 0.6,
-                hue: Math.random() < 0.65 ? "34,211,238" : "167,139,250",
+                hue: Math.random() < 0.65 ? "255, 138, 76" : "157, 123, 255",
             }));
         };
 

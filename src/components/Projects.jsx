@@ -14,7 +14,7 @@ export function GithubMark({ size = 12 }) {
 }
 
 const DOMAIN_TONE = {
-    cv:     "text-cyan border-cyan/30 bg-cyan/[0.07]",
+    cv:     "text-ember border-ember/30 bg-ember/[0.07]",
     nlp:    "text-violet border-violet/30 bg-violet/[0.07]",
     agents: "text-signal border-signal/30 bg-signal/[0.07]",
     data:   "text-warn border-warn/30 bg-warn/[0.07]",
@@ -69,7 +69,7 @@ export default function Projects() {
             />
 
             {/* Domain filter */}
-            <div className="mb-5 flex flex-wrap gap-2">
+            <div className="mb-10 flex flex-wrap gap-2">
                 {domains.map((d) => {
                     const count = d.id === "all" ? projects.length : projects.filter((p) => p.domain === d.id).length;
                     const on = filter === d.id;
@@ -77,9 +77,9 @@ export default function Projects() {
                         <button
                             key={d.id}
                             onClick={() => setFilter(d.id)}
-                            className={`rounded-lg border px-3 py-1.5 font-mono text-[11.5px] ${
+                            className={`rounded-lg border px-4 py-2 font-mono text-[12.5px] ${
                                 on
-                                    ? "border-cyan/50 bg-cyan/[0.1] text-cyan"
+                                    ? "border-ember/50 bg-ember/[0.1] text-ember"
                                     : "border-line text-ink3 hover:border-ink4 hover:text-ink2"
                             }`}
                         >
@@ -89,7 +89,7 @@ export default function Projects() {
                 })}
             </div>
 
-            <motion.div layout className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <AnimatePresence mode="popLayout">
                     {visible.map((p, i) => {
                         // Bento: the lead project in the unfiltered view gets a double-width hero card.
@@ -103,9 +103,9 @@ export default function Projects() {
                             exit={{ opacity: 0, scale: 0.97 }}
                             transition={{ duration: 0.25 }}
                             onClick={() => setActive(p)}
-                            className={`panel panel-hover group flex cursor-pointer flex-col overflow-hidden p-5 ${hero ? "md:col-span-2 sm:p-7" : ""}`}
+                            className={`panel panel-hover group flex cursor-pointer flex-col overflow-hidden p-7 ${hero ? "md:col-span-2 sm:p-9" : ""}`}
                         >
-                            {hero && <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cyan/15 blur-[80px]" />}
+                            {hero && <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-ember/15 blur-[80px]" />}
 
                             <div className="flex items-center justify-between gap-3">
                                 <span className={`rounded-md border px-2 py-0.5 font-mono text-[10px] ${DOMAIN_TONE[p.domain]}`}>
@@ -116,7 +116,7 @@ export default function Projects() {
                                 </span>
                             </div>
 
-                            <h3 className={`mt-4 font-semibold leading-snug transition-colors group-hover:text-cyan ${hero ? "text-2xl sm:text-[1.7rem]" : "text-[17px]"}`}>
+                            <h3 className={`mt-6 font-semibold leading-snug transition-colors group-hover:text-ember ${hero ? "text-2xl sm:text-[1.7rem]" : "text-[19px]"}`}>
                                 {p.title}
                             </h3>
 
@@ -126,17 +126,17 @@ export default function Projects() {
                                 <span className="font-mono text-[10.5px] text-ink3">{p.metric.label}</span>
                             </div>
 
-                            <p className={`mt-3 leading-relaxed text-ink3 ${hero ? "max-w-2xl text-[15px]" : "text-[13.5px]"}`}>{p.description}</p>
+                            <p className={`mt-4 leading-[1.7] text-ink3 ${hero ? "max-w-2xl text-[16.5px]" : "text-[15px]"}`}>{p.description}</p>
 
-                            <div className="mt-4 flex flex-wrap gap-1.5">
-                                {p.tech.slice(0, 6).map((t) => <span key={t} className="chip">{t}</span>)}
-                                {p.tech.length > 6 && <span className="chip text-ink4">+{p.tech.length - 6}</span>}
+                            <div className="mt-6 flex flex-wrap gap-2">
+                                {p.tech.slice(0, 4).map((t) => <span key={t} className="chip">{t}</span>)}
+                                {p.tech.length > 4 && <span className="chip text-ink4">+{p.tech.length - 4}</span>}
                             </div>
 
-                            <div className="flex-1 min-h-5" />
-                            <div className="flex items-center justify-between gap-3 border-t border-line pt-4">
+                            <div className="flex-1 min-h-7" />
+                            <div className="flex items-center justify-between gap-3 border-t border-line pt-5">
                                 <ProjectLinks links={p.links} />
-                                <span className="font-mono text-[11px] text-ink4 transition-colors group-hover:text-cyan">
+                                <span className="font-mono text-[11px] text-ink4 transition-colors group-hover:text-ember">
                                     details →
                                 </span>
                             </div>
@@ -169,9 +169,9 @@ export default function Projects() {
                         >
                             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-panel/95 px-5 py-3 backdrop-blur">
                                 <span className="font-mono text-[11px] text-ink4">
-                                    ~/projects/<span className="text-cyan">{active.links.github.split("/").pop()}</span>/README.md
+                                    ~/projects/<span className="text-ember">{active.links.github.split("/").pop()}</span>/README.md
                                 </span>
-                                <button onClick={() => setActive(null)} aria-label="Close" className="text-ink3 hover:text-cyan">
+                                <button onClick={() => setActive(null)} aria-label="Close" className="text-ink3 hover:text-ember">
                                     <X size={16} />
                                 </button>
                             </div>

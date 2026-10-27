@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 
@@ -8,59 +7,56 @@ export default function Education() {
         {
             degree: "M.Tech — Data Science",
             university: "Amrita Vishwa Vidyapeetham, Bengaluru",
-            cgpa: "8.16",
+            score: "8.16",
+            scale: "/10 CGPA",
             year: "2025 — Present",
-            focus: ["Deep Learning", "Reinforcement Learning", "Computer Vision", "NLP"],
         },
         {
             degree: "B.Tech — Computer Science",
-            university: "Vel Tech R&D Institute, Chennai",
-            cgpa: "7.44",
+            university: "Vel Tech R&D Institute of Science and Technology, Chennai",
+            score: "7.44",
+            scale: "/10 CGPA",
             year: "2017 — 2021",
-            focus: ["Algorithms", "Databases", "Operating Systems", "Software Engineering"],
+        },
+        {
+            degree: "Class XII (Intermediate)",
+            university: "Sri Chaitanya Junior College, Tirupati",
+            score: "94.4",
+            scale: "%",
+            year: "2017",
         },
     ];
 
     return (
-        <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-        >
-            <SectionHeader index="05" tag="education" title="Education" />
+        <div>
+            <SectionHeader index="06" tag="education" title="Education" />
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {/* timeline, newest first, like positions in a sequence */}
+            <ol className="relative flex flex-col gap-6 border-l border-line pl-8 sm:pl-12">
                 {education.map((item, i) => (
-                    <motion.div
-                        key={item.degree}
-                        initial={{ opacity: 0, y: 14 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35, delay: i * 0.08 }}
-                        className="panel panel-hover p-5"
-                    >
-                        <div className="flex items-start justify-between gap-3">
-                            <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan/25 bg-cyan/[0.07]">
-                                <GraduationCap size={18} className="text-cyan" />
-                            </span>
-                            <span className="font-mono text-[11px] text-ink4">{item.year}</span>
-                        </div>
-                        <h3 className="mt-4 text-[17px] font-semibold">{item.degree}</h3>
-                        <p className="mt-1 text-sm text-ink3">{item.university}</p>
+                    <li key={item.degree} className="relative">
+                        <span className="absolute -left-[41px] top-8 flex h-4 w-4 items-center justify-center rounded-full border-2 border-ember bg-void sm:-left-[57px]">
+                            <span className="h-1.5 w-1.5 rounded-full bg-ember" />
+                        </span>
 
-                        <div className="mt-4 flex flex-wrap gap-1.5">
-                            {item.focus.map((f) => <span key={f} className="chip">{f}</span>)}
-                        </div>
-
-                        <div className="mt-4 flex items-center gap-3 border-t border-line pt-4">
-                            <span className="font-mono text-[11px] text-ink4">cgpa</span>
-                            <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/[0.05]">
-                                <div className="h-full rounded-full bg-gradient-to-r from-cyan to-violet" style={{ width: `${Number(item.cgpa) * 10}%` }} />
+                        <div className="panel panel-hover flex flex-wrap items-center justify-between gap-6 p-7 sm:p-8">
+                            <div className="flex items-start gap-5">
+                                <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-ember/25 bg-ember/[0.07] sm:flex">
+                                    <GraduationCap size={20} className="text-ember" />
+                                </span>
+                                <div>
+                                    <p className="font-mono text-[12px] text-ink4">pos={i} · {item.year}</p>
+                                    <h3 className="mt-2 text-xl font-semibold">{item.degree}</h3>
+                                    <p className="mt-1.5 text-[15px] text-ink3">{item.university}</p>
+                                </div>
                             </div>
-                            <span className="font-display text-sm font-bold text-ink">{item.cgpa}<span className="text-ink4">/10</span></span>
+                            <p className="font-display text-3xl font-bold text-grad">
+                                {item.score}<span className="ml-1 font-mono text-[12px] font-normal text-ink4">{item.scale}</span>
+                            </p>
                         </div>
-                    </motion.div>
+                    </li>
                 ))}
-            </div>
-        </motion.section>
+            </ol>
+        </div>
     );
 }

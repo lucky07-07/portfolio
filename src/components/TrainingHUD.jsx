@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const EPOCH_OF = { about: 1, projects: 2, research: 3, skills: 4, education: 5, contact: 6 };
+const EPOCH_OF = { about: 1, projects: 2, hackathons: 3, research: 4, skills: 5, education: 6, contact: 7 };
 
 // Synthetic but plausible training curves, parameterised by scroll progress t ∈ [0, 1].
 const lossAt = (t) => 2.3 * Math.exp(-4.2 * t) + 0.04 + 0.025 * Math.sin(t * 40) * (1 - t);
@@ -38,18 +38,18 @@ export default function TrainingHUD({ activeSection }) {
         <>
             {/* thin progress bar, all sizes */}
             <div className="fixed left-0 right-0 top-0 z-50 h-[2px] bg-transparent">
-                <div className="h-full bg-gradient-to-r from-cyan to-violet shadow-[0_0_10px_#22d3ee]" style={{ width: `${t * 100}%` }} />
+                <div className="h-full bg-gradient-to-r from-ember to-violet shadow-[0_0_10px_#ff8a4c]" style={{ width: `${t * 100}%` }} />
             </div>
 
             {/* HUD, desktop only */}
             <div className="fixed bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-5 rounded-2xl border border-line bg-void/80 px-5 py-2.5 font-mono text-[11px] shadow-card backdrop-blur-xl whitespace-nowrap lg:flex">
                 <span className="text-ink3">
-                    epoch <span className="text-ink">{epoch}</span>/6
+                    epoch <span className="text-ink">{epoch}</span>/7
                 </span>
 
                 <span className="flex items-center gap-2">
                     <span className="relative h-1.5 w-28 overflow-hidden rounded-full bg-white/[0.07]">
-                        <span className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-cyan to-violet" style={{ width: `${t * 100}%` }} />
+                        <span className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-ember to-violet" style={{ width: `${t * 100}%` }} />
                     </span>
                     <span className="w-8 text-ink3">{Math.round(t * 100)}%</span>
                 </span>
@@ -62,7 +62,7 @@ export default function TrainingHUD({ activeSection }) {
                 </span>
 
                 <svg width={W} height={HGT} className="overflow-visible" aria-hidden="true">
-                    <path d={path} fill="none" stroke="#fbbf24" strokeWidth="1.3" strokeLinejoin="round" />
+                    <path d={path} fill="none" stroke="#ffcc66" strokeWidth="1.3" strokeLinejoin="round" />
                 </svg>
             </div>
         </>

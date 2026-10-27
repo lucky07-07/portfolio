@@ -37,13 +37,13 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
         >
-            <SectionHeader index="06" tag="contact" title="Let's build something intelligent." />
+            <SectionHeader index="07" tag="contact" title="Let's build something intelligent." />
 
-            <div className="panel overflow-hidden p-6 sm:p-8">
-                <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-cyan/15 blur-[90px]" />
+            <div className="panel overflow-hidden p-8 sm:p-12">
+                <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-ember/15 blur-[90px]" />
                 <div className="relative z-10 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
                     <div>
-                        <p className="text-[15px] leading-relaxed text-ink2">
+                        <p className="text-[18px] leading-[1.7] text-ink2">
                             Open to <span className="text-ink">AI/ML engineering roles, internships</span> and{" "}
                             <span className="text-ink">research collaborations</span> in computer vision, medical
                             imaging, LLMs and agentic systems.
@@ -64,16 +64,16 @@ export default function Contact() {
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group flex items-center gap-4 rounded-xl border border-line bg-void/50 px-4 py-3 transition-colors hover:border-cyan/40"
+                                className="group flex items-center gap-4 rounded-xl border border-line bg-void/50 px-5 py-4 transition-colors hover:border-ember/40"
                             >
-                                <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-cyan">
+                                <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-ember">
                                     <Icon size={16} />
                                 </span>
                                 <div className="min-w-0 flex-1">
                                     <p className="font-mono text-[10px] uppercase tracking-wider text-ink4">{label}</p>
                                     <p className="truncate text-sm text-ink">{value}</p>
                                 </div>
-                                <ArrowUpRight size={15} className="text-ink4 transition-colors group-hover:text-cyan" />
+                                <ArrowUpRight size={15} className="text-ink4 transition-colors group-hover:text-ember" />
                             </a>
                         ))}
                     </div>

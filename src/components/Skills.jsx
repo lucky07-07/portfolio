@@ -1,165 +1,108 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 
 // Logo sources: devicon (jsDelivr) + simple-icons CDN. Any that fail to load
-// fall back to a plain name tag (see SkillTile).
+// fall back to a dot (see SkillTile).
 const devicon = (path) =>
   `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${path}`;
 const simple = (slug, color) =>
   `https://cdn.simpleicons.org/${slug}${color ? `/${color}` : ""}`;
 
+// One home per tool: no tool appears in two groups.
 const groups = [
   {
-    id: "dl",
-    label: "Deep Learning",
-    cmd: "import torch",
+    id: "model",
+    label: "Modeling",
+    note: "train & evaluate",
     skills: [
       { name: "Python",       logo: devicon("python/python-original.svg") },
       { name: "PyTorch",      logo: devicon("pytorch/pytorch-original.svg") },
       { name: "TensorFlow",   logo: devicon("tensorflow/tensorflow-original.svg") },
-      { name: "JAX",          logo: simple("jax", "A78BFA") },
-      { name: "CUDA",         logo: simple("nvidia", "76B900") },
-      { name: "timm",         logo: null },
-      { name: "Optuna",       logo: null },
+      { name: "scikit-learn", logo: devicon("scikitlearn/scikitlearn-original.svg") },
+      { name: "XGBoost",      logo: null },
+      { name: "OpenCV",       logo: devicon("opencv/opencv-original.svg") },
     ],
   },
   {
-    id: "genai",
+    id: "llm",
     label: "LLMs & Agents",
-    cmd: "from langgraph import StateGraph",
+    note: "retrieve, reason, act",
     skills: [
       { name: "Hugging Face", logo: simple("huggingface", "FFD21E") },
       { name: "LangChain",    logo: simple("langchain", "FFFFFF") },
       { name: "LangGraph",    logo: simple("langgraph", "FFFFFF") },
       { name: "Ollama",       logo: simple("ollama", "FFFFFF") },
-      { name: "RAG",          logo: null },
-      { name: "LanceDB",      logo: null },
-      { name: "Prompting",    logo: null },
-    ],
-  },
-  {
-    id: "cvnlp",
-    label: "Vision & Language",
-    cmd: "model = ViT_B_16(weights='SWAG')",
-    skills: [
-      { name: "OpenCV",       logo: devicon("opencv/opencv-original.svg") },
-      { name: "Kornia",       logo: null },
-      { name: "spaCy",        logo: simple("spacy", "09A3D5") },
-      { name: "CLIP",         logo: null },
-      { name: "Transformers", logo: null },
-      { name: "DICOM",        logo: null },
     ],
   },
   {
     id: "data",
-    label: "Applied ML & Data",
-    cmd: "df = duckdb.sql(q).df()",
+    label: "Data",
+    note: "store, stream, analyse",
     skills: [
-      { name: "scikit-learn", logo: devicon("scikitlearn/scikitlearn-original.svg") },
-      { name: "XGBoost",      logo: null },
-      { name: "CatBoost",     logo: null },
       { name: "pandas",       logo: devicon("pandas/pandas-original.svg") },
       { name: "DuckDB",       logo: simple("duckdb", "FFF000") },
       { name: "PySpark",      logo: simple("apachespark", "E25A1C") },
-      { name: "Power BI",     logo: null },
-      { name: "SHAP",         logo: null },
+      { name: "Kafka",        logo: simple("apachekafka", "FFFFFF") },
+      { name: "PostgreSQL",   logo: devicon("postgresql/postgresql-original.svg") },
     ],
   },
   {
-    id: "mlops",
-    label: "MLOps & Cloud",
-    cmd: "docker compose up -d",
+    id: "ship",
+    label: "Deploy",
+    note: "serve & scale",
     skills: [
       { name: "AWS",          logo: devicon("amazonwebservices/amazonwebservices-original-wordmark.svg") },
       { name: "Docker",       logo: devicon("docker/docker-original.svg") },
       { name: "Kubernetes",   logo: devicon("kubernetes/kubernetes-original.svg") },
       { name: "FastAPI",      logo: devicon("fastapi/fastapi-original.svg") },
-      { name: "Kafka",        logo: simple("apachekafka", "FFFFFF") },
-      { name: "PostgreSQL",   logo: devicon("postgresql/postgresql-original.svg") },
-      { name: "Prometheus",   logo: devicon("prometheus/prometheus-original.svg") },
-      { name: "Linux",        logo: devicon("linux/linux-original.svg") },
-      { name: "Git",          logo: devicon("git/git-original.svg") },
-    ],
-  },
-  {
-    id: "web",
-    label: "Frontend",
-    cmd: "npm run dev",
-    skills: [
       { name: "React",        logo: devicon("react/react-original.svg") },
-      { name: "Next.js",      logo: simple("nextdotjs", "FFFFFF") },
-      { name: "TypeScript",   logo: devicon("typescript/typescript-original.svg") },
-      { name: "Tailwind CSS", logo: simple("tailwindcss", "06B6D4") },
-      { name: "D3.js",        logo: simple("d3", "F9A03C") },
+      { name: "Git",          logo: devicon("git/git-original.svg") },
     ],
   },
 ];
 
-// Logo + name pill; a missing or broken logo falls back to a dot.
+// Logo + name tile; a missing or broken logo falls back to a dot.
 function SkillTile({ name, logo }) {
   const [errored, setErrored] = useState(false);
   const showLogo = logo && !errored;
 
   return (
-    <div className="flex items-center gap-2 rounded-lg border border-line bg-white/[0.02] px-2.5 py-1.5 transition-colors hover:border-cyan/40 hover:bg-cyan/[0.05]">
+    <div className="flex items-center gap-3 rounded-xl border border-line bg-white/[0.02] px-4 py-3 transition-colors hover:border-ember/40 hover:bg-ember/[0.05]">
       {showLogo ? (
-        <img
-          src={logo}
-          alt=""
-          loading="lazy"
-          onError={() => setErrored(true)}
-          className="h-4 w-4 object-contain"
-        />
+        <img src={logo} alt="" loading="lazy" onError={() => setErrored(true)} className="h-5 w-5 object-contain" />
       ) : (
-        <span className="h-1.5 w-1.5 rounded-full bg-cyan/70" />
+        <span className="flex h-5 w-5 items-center justify-center"><span className="h-2 w-2 rounded-full bg-ember/80" /></span>
       )}
-      <span className="text-[12.5px] text-ink2">{name}</span>
+      <span className="text-[14.5px] text-ink2">{name}</span>
     </div>
   );
 }
 
 export default function Skills() {
-  const total = groups.reduce((n, g) => n + g.skills.length, 0);
-
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-    >
+    <div>
       <SectionHeader
-        index="04"
+        index="05"
         tag="stack"
         title="Tech Stack"
-        subtitle="The tools behind the projects, grouped by where they sit in the ML lifecycle."
-        right={<span className="chip">{total} tools · {groups.length} layers</span>}
+        subtitle="The core tools behind the projects, one home per tool, grouped by stage of the ML lifecycle."
       />
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2">
         {groups.map((g, i) => (
-          <motion.div
-            key={g.id}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: i * 0.06 }}
-            className="panel panel-hover flex flex-col p-5"
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-[15px] font-semibold">{g.label}</h3>
-              <span className="font-mono text-[10px] text-ink4">0{i + 1}</span>
+          <div key={g.id} className="panel panel-hover p-7">
+            <div className="flex items-baseline justify-between gap-3">
+              <h3 className="text-xl font-semibold">{g.label}</h3>
+              <span className="font-mono text-[11.5px] text-ink4">L{i + 1} · {g.note}</span>
             </div>
-            <p className="mt-1 truncate font-mono text-[11px] text-ink4">
-              <span className="text-signal">$</span> {g.cmd}
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
               {g.skills.map((s) => (
                 <SkillTile key={s.name} name={s.name} logo={s.logo} />
               ))}
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.section>
+    </div>
   );
 }

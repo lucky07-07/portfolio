@@ -33,11 +33,11 @@ export default function Navbar({ items, activeSection, onNavigate }) {
                 }`}
             >
                 <button onClick={() => handleNav("overview")} className="flex items-center gap-2.5">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan/30 bg-cyan/[0.08] font-display text-sm font-bold text-cyan">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-ember/30 bg-ember/[0.08] font-display text-sm font-bold text-ember">
                         AK
                     </span>
                     <span className="hidden font-mono text-[12px] text-ink2 xl:inline">
-                        anil<span className="text-cyan">.</span>kumar<span className="text-ink4">/ml</span>
+                        anil<span className="text-ember">.</span>kumar<span className="text-ink4">/ml</span>
                     </span>
                 </button>
 
@@ -55,7 +55,7 @@ export default function Navbar({ items, activeSection, onNavigate }) {
                                     <motion.span
                                         layoutId="nav-pill"
                                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                                        className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan to-violet"
+                                        className="absolute inset-0 rounded-full bg-gradient-to-r from-ember to-violet"
                                     />
                                 )}
                                 <span className="relative font-medium">{name}</span>
@@ -92,7 +92,7 @@ export default function Navbar({ items, activeSection, onNavigate }) {
                                 key={id}
                                 onClick={() => handleNav(id)}
                                 className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm ${
-                                    activeSection === id ? "bg-cyan/[0.08] text-cyan" : "text-ink2 hover:bg-white/[0.03]"
+                                    activeSection === id ? "bg-ember/[0.08] text-ember" : "text-ink2 hover:bg-white/[0.03]"
                                 }`}
                             >
                                 <span className="font-mono text-[10px] text-ink4">0{i + 1}</span>

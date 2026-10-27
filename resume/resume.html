@@ -1,0 +1,184 @@
+<!doctype html>
+<!-- Source for public/resume.pdf. Rebuild with: npm run resume -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Anil Kumar — Resume</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Cambria", "Georgia", "Times New Roman", serif;
+    font-size: 10.1pt;
+    line-height: 1.32;
+    color: #111;
+  }
+  a { color: inherit; text-decoration: none; }
+  header { text-align: center; }
+  h1 { margin: 0; font-size: 23pt; letter-spacing: 0.5px; }
+  .contact { margin-top: 3px; font-size: 8.7pt; color: #333; white-space: nowrap; }
+  .contact span + span::before { content: " | "; color: #999; white-space: pre; }
+  h2 {
+    margin: 11px 0 5px;
+    padding-bottom: 2px;
+    font-size: 11.2pt;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #222;
+  }
+  .row { display: flex; justify-content: space-between; gap: 12px; }
+  .row b { font-weight: 700; }
+  .date { white-space: nowrap; font-style: italic; }
+  .tech { font-style: italic; font-size: 9.1pt; color: #333; margin: 1px 0 2px; }
+  ul { margin: 2px 0 6px; padding-left: 16px; }
+  li { margin: 1px 0; }
+  .entry { margin-bottom: 4px; break-inside: avoid; }
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 22px; }
+  .skills p { margin: 0 0 3px; }
+  .muted { color: #444; }
+  p { margin: 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Anil Kumar</h1>
+  <div class="contact">
+    <span>+91 9182929960</span>
+    <span><a href="mailto:anilkumarlucky07@gmail.com">anilkumarlucky07@gmail.com</a></span>
+    <span><a href="https://www.linkedin.com/in/anil-kumar-29884a17a/">linkedin.com/in/anil-kumar-29884a17a</a></span>
+    <span><a href="https://github.com/lucky07-07">github.com/lucky07-07</a></span>
+    <span><a href="https://portfolio-phi-five-40.vercel.app">portfolio-phi-five-40.vercel.app</a></span>
+  </div>
+</header>
+
+<h2>Career Objective</h2>
+<p>
+  AI / ML Engineer and M.Tech Data Science student at Amrita Vishwa Vidyapeetham, working across deep learning,
+  computer vision, medical imaging, NLP, LLMs and agentic systems. Builds end-to-end PyTorch pipelines from dataset
+  construction to training, honest evaluation and deployment. Seeking Machine Learning / AI / Computer Vision / GenAI roles.
+</p>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+  <p><b>Languages &amp; Libraries:</b> Python, NumPy, Pandas, SciPy, scikit-learn, Matplotlib, Plotly, OpenCV</p>
+  <p><b>Deep Learning:</b> PyTorch, TensorFlow, Keras, timm, CNN, LSTM/GRU, ViT, Swin, ConvNeXt, CLIP, AMP, CUDA</p>
+  <p><b>LLMs &amp; Agents:</b> Hugging Face Transformers, LangChain, LangGraph, Ollama, RAG, LLM-based labelling</p>
+  <p><b>Machine Learning:</b> XGBoost, LightGBM, CatBoost, Optuna, SHAP, ensembling, calibration, focal loss, TTA</p>
+  <p><b>Data &amp; Streaming:</b> DuckDB, PostgreSQL/PostGIS, PySpark, Kafka, Power BI, SQL</p>
+  <p><b>Deployment &amp; Cloud:</b> AWS, Docker, Kubernetes, FastAPI, REST APIs, Git, Linux</p>
+</div>
+
+<h2>Education</h2>
+<div class="entry">
+  <div class="row"><b>Amrita Vishwa Vidyapeetham, Bengaluru</b><span class="date">2025 – Present</span></div>
+  <div class="row"><span>M.Tech in Data Science</span><span class="date">CGPA: 8.16</span></div>
+</div>
+<div class="entry">
+  <div class="row"><b>Vel Tech R&amp;D Institute of Science and Technology, Chennai</b><span class="date">2017 – 2021</span></div>
+  <div class="row"><span>B.Tech in Computer Science</span><span class="date">CGPA: 7.44</span></div>
+</div>
+<div class="entry">
+  <div class="row"><b>Sri Chaitanya Junior College, Tirupati</b><span class="date">2017</span></div>
+  <div class="row"><span>Class XII (Intermediate)</span><span class="date">Percentage: 94.4%</span></div>
+</div>
+
+<h2>Projects</h2>
+
+<div class="entry">
+  <div class="row"><b>Knee MRI Abnormality Detection — RSNA Kaggle Competition</b><span class="date">2026</span></div>
+  <p class="tech">PyTorch, timm (ConvNeXt), Hugging Face Transformers (Qwen2.5-14B, 4-bit), pydicom, scikit-learn</p>
+  <ul>
+    <li>Multi-label detection of <b>12 knee abnormalities</b> from multi-series MRI (≈820K DICOM files, 570 GB); only 58 of 4,407 studies had radiologist labels.</li>
+    <li>Graded multilingual radiology reports with an <b>LLM</b>, calibrated and blended label sources, lifting label quality from 0.71 to <b>0.93 macro-AUC</b>.</li>
+    <li>Built a 2.5D ConvNeXt with cross-series transformer attention; a 15-model TTA ensemble reached <b>0.906 private-leaderboard AUC</b> among 6,425 teams.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><b>KIC-COCO: Kannada Image Captioning Dataset and Benchmark</b><span class="date">2026</span></div>
+  <p class="tech">PyTorch, IndicTrans2-1B, CLIP, ViT, Swin, ConvNeXt, IndicBART, BERTScore, sacreBLEU</p>
+  <ul>
+    <li>Constructed a <b>250K-caption Kannada corpus</b> over 50K MS COCO images with fixed splits; benchmarked <b>6 encoder–decoder architectures</b> (CNN–RNN with attention and transformer decoders).</li>
+    <li>Best model ConvNeXtTransformer reached character-level <b>BLEU-4 68.65</b>, chrF 43.20 and back-translation <b>BERTScore F1 84.02</b>; paper under review at ICMLDE 2026.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><b>AgroVision-7: Fine-Grained Rice Leaf Disease Recognition</b><span class="date">2026</span></div>
+  <p class="tech">PyTorch, ViT, Swin, ConvNeXt, Optuna, Focal Loss, TTA, Grad-CAM</p>
+  <ul>
+    <li>7-class classifier on 14,241 images; ensemble of ViT-B/16, Swin-T and ConvNeXt-Tiny achieved <b>97.48% accuracy and 0.9750 macro-F1</b>, every per-class accuracy ≥ 0.96.</li>
+    <li>Imbalance-aware pipeline (weighted sampler + class-weighted focal loss) lifted ResNet-50 by <b>+17.23 points</b>; 15-trial Optuna search, 5-view TTA and Grad-CAM explainability.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><b>COD Return-Risk Scorer — Razorpay AI Buildathon 2026</b><span class="date">2026</span></div>
+  <p class="tech">CatBoost, scikit-learn, SHAP, FastAPI, Docker, pytest</p>
+  <ul>
+    <li>Cost-sensitive, leakage-controlled risk scorer for Indian cash-on-delivery orders, deployed as a <b>live FastAPI service</b> with SHAP reasons per prediction.</li>
+    <li>Compared 11 models with paired bootstrap CIs and set a cost-optimal threshold; saves <b>₹29,481 per 10K orders</b> (ROC-AUC 0.806).</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><b>SustainSched: Carbon-Aware Kubernetes Scheduling Agent</b><span class="date">2026</span></div>
+  <p class="tech">LangGraph, Ollama (Llama 3.2 3B), XGBoost, LSTM/GRU, FastAPI, Kubernetes, Prometheus, Grafana</p>
+  <ul>
+    <li>Autonomous agent that ranks 14 UK grid regions by forecast carbon intensity and emits explainable deploy / delay / migrate decisions.</li>
+    <li>XGBoost forecaster beat LSTM and GRU with <b>R² 0.917</b> (MAE 7.16); runs locally on a 6 GB laptop GPU.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><b>Sentient: Self-Verifying AI Intelligence Agent</b><span class="date">2026</span></div>
+  <p class="tech">Next.js, TypeScript, Groq (qwen3-32b), Gemini embeddings, LanceDB, D3.js</p>
+  <ul>
+    <li>Agentic RAG over 8 live sources with a draft → verify → revise loop: a critic checks every claim against retrieved chunks before publishing a cited daily briefing.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><b>EV Battery Analytics and AppealIQ Health-Plan Analytics</b><span class="date">2026</span></div>
+  <p class="tech">DuckDB, XGBoost, LightGBM, Optuna, SHAP, Isolation Forest, Power BI, Ollama</p>
+  <ul>
+    <li>EV: stacked virtual state-of-charge sensor with <b>2.1% error (R² 0.96)</b> on 70 real BMW i3 drives, plus a local RAG + text-to-SQL assistant.</li>
+    <li>AppealIQ: overturn-risk model on 42,710 real medical-review decisions, <b>ROC-AUC 0.736</b> on unseen years; NLP routing at 89.1% accuracy.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><b>Mental Health Risk and Treatment Prediction with Agentic AI Integration</b><span class="date">2025</span></div>
+  <p class="tech">scikit-learn, XGBoost, LightGBM, SHAP, Optuna, Stacking Ensemble</p>
+  <ul>
+    <li>Benchmarked 11 classifiers; a stacking ensemble reached <b>95.22% accuracy and 0.9939 ROC-AUC</b>, with SHAP feature-importance consensus of 96% across models.</li>
+  </ul>
+</div>
+
+<h2>Hackathons &amp; Competitions</h2>
+<div class="entry">
+  <div class="row"><span><b>Razorpay AI Buildathon 2026</b> — Track 02, AI Risk Manager: built and deployed the COD Return-Risk Scorer.</span><span class="date">2026</span></div>
+</div>
+<div class="entry">
+  <div class="row"><span><b>RSNA Knee Abnormality Detection (Kaggle)</b> — 0.906 private AUC in a 6,425-team research code competition.</span><span class="date">2026</span></div>
+</div>
+
+<h2>Publications</h2>
+<div class="entry">
+  <div class="row"><b>Wildfire Occurrence Analysis Using Meteorological Data: A Comparative Study of Statistical Methods and Learning Models</b><span class="date">Apr 2026</span></div>
+  <p class="muted"><i>9th International Conference on Inventive Computation Technologies (ICICT 2026)</i> — Published</p>
+</div>
+<div class="entry">
+  <div class="row"><b>KIC-COCO: A Benchmark Dataset for Kannada Image Captioning and Architecture Comparison</b><span class="date">2026</span></div>
+  <p class="muted"><i>5th International Conference on Machine Learning and Data Engineering (ICMLDE 2026)</i> — Under review</p>
+</div>
+
+<h2>Certifications</h2>
+<div class="row"><span><b>AWS Certified Cloud Practitioner</b> — Amazon Web Services</span><span class="date"></span></div>
+<div class="row"><span><b>AWS Academy Graduate – Cloud Foundations</b> — Amazon Web Services</span><span class="date">Feb 2026</span></div>
+<div class="row"><span><b>Deep Learning Onramp; Image Processing Onramp</b> — MathWorks</span><span class="date"></span></div>
+
+</body>
+</html>
