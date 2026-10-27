@@ -9,38 +9,48 @@ export default {
     extend: {
 
       colors: {
-        accent:      "#f0c674",
-        "accent-ho": "#e6b85c",
-        "accent-dk": "#d9a441",
+        // Neural / terminal palette
+        void:    "#05070d",
+        abyss:   "#0a0f1c",
+        panel:   "#0d1426",
+        line:    "rgba(148,163,184,0.12)",
 
-        surface:   "#0f0f10",
-        surface1:  "#131314",
-        surface2:  "#1a1a1d",
-        card:      "#1e1e21",
-        cardHi:    "#232326",
+        cyan:    "#22d3ee",
+        violet:  "#a78bfa",
+        signal:  "#34d399",
+        warn:    "#fbbf24",
 
-        ink:     "#ffffff",
-        ink2:    "#d1d1d1",
-        ink3:    "#9f9f9f",
-        ink4:    "#5a5a5a",
+        ink:     "#e6edf7",
+        ink2:    "#b4bfd2",
+        ink3:    "#7d8aa3",
+        ink4:    "#4b5670",
       },
 
       boxShadow: {
-        card:      "0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04)",
-        "card-lg": "0 10px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)",
-        gold:      "0 0 16px rgba(240,198,116,0.14)",
+        card:  "0 10px 40px -12px rgba(0,0,0,0.6)",
+        glow:  "0 0 0 1px rgba(34,211,238,0.25), 0 0 32px -6px rgba(34,211,238,0.35)",
+        glowV: "0 0 0 1px rgba(167,139,250,0.25), 0 0 32px -6px rgba(167,139,250,0.35)",
       },
 
       fontFamily: {
-        sans: ["Plus Jakarta Sans", "sans-serif"],
+        sans:    ["Inter", "system-ui", "sans-serif"],
+        display: ["Space Grotesk", "Inter", "sans-serif"],
+        mono:    ["JetBrains Mono", "ui-monospace", "monospace"],
       },
 
-      backdropBlur: {
-        xs: "2px",
+      keyframes: {
+        blink:   { "0%,50%": { opacity: "1" }, "51%,100%": { opacity: "0" } },
+        spinSlow:{ to: { transform: "rotate(360deg)" } },
+        pulseDot:{ "0%,100%": { opacity: "1" }, "50%": { opacity: "0.35" } },
+        scan:    { "0%": { transform: "translateY(-100%)" }, "100%": { transform: "translateY(100%)" } },
       },
 
-      borderRadius: {
-        "4xl": "2rem",
+      animation: {
+        blink:    "blink 1s steps(1) infinite",
+        "spin-slow": "spinSlow 18s linear infinite",
+        "spin-rev":  "spinSlow 26s linear infinite reverse",
+        pulseDot: "pulseDot 2s ease-in-out infinite",
+        scan:     "scan 6s linear infinite",
       },
 
     },

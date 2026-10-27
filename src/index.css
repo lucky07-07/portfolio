@@ -7,125 +7,156 @@ html {
 }
 
 body {
-  background: #0f0f10;
-  color: #d1d1d1;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #05070d;
+  color: #b4bfd2;
+  font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Very subtle warm tint — barely perceptible */
+/* Grid + aurora behind everything */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 100%);
+  pointer-events: none;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
   background:
-    radial-gradient(ellipse 70% 55% at 15% 12%, rgba(240, 198, 116, 0.028), transparent),
-    radial-gradient(ellipse 55% 45% at 82% 85%, rgba(240, 198, 116, 0.018), transparent);
+    radial-gradient(ellipse 55% 45% at 12% 8%, rgba(34, 211, 238, 0.10), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 90% 90%, rgba(167, 139, 250, 0.10), transparent 70%);
   pointer-events: none;
-  z-index: -1;
+  z-index: -3;
 }
 
-/* Smooth text selection */
 ::selection {
-  background: rgba(240, 198, 116, 0.2);
-  color: #0f0f10;
+  background: rgba(34, 211, 238, 0.3);
+  color: #e6edf7;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #0f0f10;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #05070d; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(240, 198, 116, 0.22);
+  background: linear-gradient(#22d3ee55, #a78bfa55);
   border-radius: 999px;
 }
 
-/* ─── Typography utilities ───────────────────────── */
-.type-display {
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
-.type-heading {
-  font-weight: 700;
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  color: #e6edf7;
   letter-spacing: -0.02em;
-  line-height: 1.15;
 }
 
-.type-subheading {
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
+@layer components {
+  /* Glass panel with a subtle top highlight */
+  .panel {
+    position: relative;
+    background: linear-gradient(180deg, rgba(16, 24, 46, 0.78), rgba(9, 14, 28, 0.78));
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 18px;
+    box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Hover: border lights up cyan→violet */
+  .panel-hover {
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+  .panel-hover:hover {
+    border-color: rgba(34, 211, 238, 0.35);
+    box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.12), 0 18px 50px -18px rgba(34, 211, 238, 0.35);
+  }
+
+  /* Gradient text accent */
+  .text-grad {
+    background: linear-gradient(90deg, #22d3ee 0%, #818cf8 55%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Monospace eyebrow label, e.g. "// 02 · projects" */
+  .eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #22d3ee;
+  }
+
+  .chip {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px;
+    line-height: 1;
+    padding: 5px 8px;
+    border-radius: 6px;
+    color: #b4bfd2;
+    background: rgba(148, 163, 184, 0.06);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #05070d;
+    background: linear-gradient(90deg, #22d3ee, #818cf8);
+    box-shadow: 0 8px 30px -10px rgba(34, 211, 238, 0.6);
+    transition: filter .2s ease, transform .2s ease;
+  }
+  .btn-primary:hover { filter: brightness(1.1); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #e6edf7;
+    background: rgba(148, 163, 184, 0.06);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(34, 211, 238, 0.45);
+    background: rgba(34, 211, 238, 0.06);
+  }
+
+  .link-mono {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: #7d8aa3;
+    transition: color .2s ease;
+  }
+  .link-mono:hover { color: #22d3ee; }
 }
 
-.type-label {
-  font-size: 10px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #f0c674;
-}
+button { transition: all 0.2s ease; }
+button:active { transform: scale(0.98); }
 
-.type-body {
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.65;
-  color: #c8c8c8;
-}
-
-.type-meta {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.55;
-  color: #9f9f9f;
-}
-
-/* ─── Card system ─────────────────────────────────── */
-.futuristic-card {
-  background: #1e1e21;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  border-radius: 24px;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.neon-hover {
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-}
-.neon-hover:hover {
-  border-color: rgba(255, 255, 255, 0.10);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
-}
-
-/* ─── Glow orbs — very soft ──────────────────────── */
-.glow-orb {
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(90px);
-  opacity: 0.07;
-  pointer-events: none;
-}
-.glow-green {
-  background: rgba(240, 198, 116, 0.35);
-}
-.glow-soft {
-  background: rgba(255, 255, 255, 0.08);
-}
-.glow-gold {
-  background: rgba(240, 198, 116, 0.35);
-}
-
-/* ─── Global button reset ─────────────────────────── */
-button {
-  transition: all 0.2s ease;
-}
-button:active {
-  transform: scale(0.98);
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
