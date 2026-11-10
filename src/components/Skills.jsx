@@ -1,12 +1,13 @@
 import { useState } from "react";
 import SectionHeader from "./SectionHeader";
+import { devicon } from "../data/logos";
 
 // Logo sources: devicon (jsDelivr) + simple-icons CDN. Any that fail to load
 // fall back to a dot (see SkillTile).
-const devicon = (path) =>
-  `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${path}`;
 const simple = (slug, color) =>
   `https://cdn.simpleicons.org/${slug}${color ? `/${color}` : ""}`;
+
+const INK = "181713";
 
 // One home per tool: no tool appears in two groups.
 const groups = [
@@ -28,10 +29,10 @@ const groups = [
     label: "LLMs & Agents",
     note: "retrieve, reason, act",
     skills: [
-      { name: "Hugging Face", logo: simple("huggingface", "FFD21E") },
-      { name: "LangChain",    logo: simple("langchain", "FFFFFF") },
-      { name: "LangGraph",    logo: simple("langgraph", "FFFFFF") },
-      { name: "Ollama",       logo: simple("ollama", "FFFFFF") },
+      { name: "Hugging Face", logo: simple("huggingface", "E0A800") },
+      { name: "LangChain",    logo: simple("langchain", INK) },
+      { name: "LangGraph",    logo: simple("langgraph", INK) },
+      { name: "Ollama",       logo: simple("ollama", INK) },
     ],
   },
   {
@@ -40,9 +41,9 @@ const groups = [
     note: "store, stream, analyse",
     skills: [
       { name: "pandas",       logo: devicon("pandas/pandas-original.svg") },
-      { name: "DuckDB",       logo: simple("duckdb", "FFF000") },
+      { name: "DuckDB",       logo: simple("duckdb", INK) },
       { name: "PySpark",      logo: simple("apachespark", "E25A1C") },
-      { name: "Kafka",        logo: simple("apachekafka", "FFFFFF") },
+      { name: "Kafka",        logo: simple("apachekafka", INK) },
       { name: "PostgreSQL",   logo: devicon("postgresql/postgresql-original.svg") },
     ],
   },
@@ -61,20 +62,20 @@ const groups = [
   },
 ];
 
-// Logo + name tile; a missing or broken logo falls back to a dot.
+// Logo + name row; a missing or broken logo falls back to a dot.
 function SkillTile({ name, logo }) {
   const [errored, setErrored] = useState(false);
   const showLogo = logo && !errored;
 
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-line bg-white/[0.02] px-4 py-3 transition-colors hover:border-ember/40 hover:bg-ember/[0.05]">
+    <li className="group flex items-center gap-3.5 border-t border-line py-3 transition-colors hover:border-ink">
       {showLogo ? (
-        <img src={logo} alt="" loading="lazy" onError={() => setErrored(true)} className="h-5 w-5 object-contain" />
+        <img src={logo} alt="" loading="lazy" onError={() => setErrored(true)} className="h-5 w-5 object-contain grayscale-[35%] transition group-hover:grayscale-0" />
       ) : (
-        <span className="flex h-5 w-5 items-center justify-center"><span className="h-2 w-2 rounded-full bg-ember/80" /></span>
+        <span className="flex h-5 w-5 items-center justify-center"><span className="h-2 w-2 rounded-full bg-accent" /></span>
       )}
-      <span className="text-[14.5px] text-ink2">{name}</span>
-    </div>
+      <span className="text-[15px] text-ink2 transition-colors group-hover:text-ink">{name}</span>
+    </li>
   );
 }
 
@@ -82,24 +83,26 @@ export default function Skills() {
   return (
     <div>
       <SectionHeader
-        index="05"
+        index="06"
         tag="stack"
-        title="Tech Stack"
+        title={<>Tech <span className="em">stack.</span></>}
         subtitle="The core tools behind the projects, one home per tool, grouped by stage of the ML lifecycle."
       />
 
-      <div className="grid gap-6 md:grid-cols-2">
+      {/* four stages of the lifecycle, read left to right */}
+      <div className="card grid overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
         {groups.map((g, i) => (
-          <div key={g.id} className="panel panel-hover p-7">
-            <div className="flex items-baseline justify-between gap-3">
-              <h3 className="text-xl font-semibold">{g.label}</h3>
-              <span className="font-mono text-[11.5px] text-ink4">L{i + 1} · {g.note}</span>
-            </div>
-            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+          <div
+            key={g.id}
+            className={`p-6 sm:p-7 ${i > 0 ? "border-t border-line" : ""} ${i === 1 ? "sm:border-t-0" : ""} ${i > 1 ? "lg:border-t-0" : ""} ${i % 2 === 1 ? "sm:border-l" : ""} ${i > 0 ? "lg:border-l" : ""}`}
+          >
+            <p className="font-mono text-[11px] text-accent">L{i + 1} <span className="text-ink4">· {g.note}</span></p>
+            <h3 className="mb-6 mt-3 text-[1.9rem] leading-none">{g.label}</h3>
+            <ul>
               {g.skills.map((s) => (
                 <SkillTile key={s.name} name={s.name} logo={s.logo} />
               ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>

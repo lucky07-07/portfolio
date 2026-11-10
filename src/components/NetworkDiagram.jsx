@@ -25,7 +25,7 @@ const PULSES = EDGES.filter((_, i) => i % 3 === 0).map((e, i) => ({
     e,
     dur: 1.6 + ((i * 37) % 10) / 10,
     begin: ((i * 53) % 30) / 10,
-    color: i % 2 ? "#9d7bff" : "#ff8a4c",
+    color: i % 2 ? "#181713" : "#C4532D",
 }));
 
 // Feed-forward network diagram whose output neuron is the profile photo.
@@ -35,8 +35,8 @@ export default function NetworkDiagram() {
             <svg viewBox={`0 0 420 ${H}`} className="w-full" aria-hidden="true">
                 <defs>
                     <linearGradient id="edge" x1="0" x2="1">
-                        <stop offset="0" stopColor="#ff8a4c" stopOpacity="0.35" />
-                        <stop offset="1" stopColor="#9d7bff" stopOpacity="0.35" />
+                        <stop offset="0" stopColor="#181713" stopOpacity="0.10" />
+                        <stop offset="1" stopColor="#181713" stopOpacity="0.26" />
                     </linearGradient>
                 </defs>
 
@@ -55,7 +55,7 @@ export default function NetworkDiagram() {
 
                 {/* forward-pass signals */}
                 {PULSES.map(({ e: [x1, y1, x2, y2], dur, begin, color }, i) => (
-                    <circle key={i} r="2.2" fill={color} style={{ filter: `drop-shadow(0 0 4px ${color})` }}>
+                    <circle key={i} r="2.2" fill={color}>
                         <animateMotion dur={`${dur}s`} begin={`${begin}s`} repeatCount="indefinite" path={`M${x1},${y1} L${x2},${y2}`} />
                         <animate attributeName="opacity" values="0;1;1;0" dur={`${dur}s`} begin={`${begin}s`} repeatCount="indefinite" />
                     </circle>
@@ -65,8 +65,8 @@ export default function NetworkDiagram() {
                 {LAYERS.map((l, li) =>
                     l.ys.map((y, ni) => (
                         <g key={`${li}-${ni}`}>
-                            <circle cx={l.x} cy={y} r="8" fill="#181221" stroke={li === 0 ? "#ff8a4c" : "#f2508f"} strokeWidth="1.4" />
-                            <circle cx={l.x} cy={y} r="3" fill={li === 0 ? "#ff8a4c" : "#9d7bff"}>
+                            <circle cx={l.x} cy={y} r="8" fill="#F8F7F2" stroke={li === 0 ? "#C4532D" : "#181713"} strokeWidth="1.2" />
+                            <circle cx={l.x} cy={y} r="3" fill={li === 0 ? "#C4532D" : "#181713"}>
                                 <animate attributeName="opacity" values="0.3;1;0.3" dur={`${2 + ((li + ni) % 3) * 0.6}s`} repeatCount="indefinite" />
                             </circle>
                         </g>
@@ -81,10 +81,10 @@ export default function NetworkDiagram() {
                 ))}
 
                 {/* output ring */}
-                <circle cx={OUT.x} cy={OUT.y} r={OUT.r + 6} fill="none" stroke="#ff8a4c" strokeOpacity="0.35" strokeDasharray="3 5">
+                <circle cx={OUT.x} cy={OUT.y} r={OUT.r + 6} fill="none" stroke="#C4532D" strokeOpacity="0.6" strokeDasharray="3 5">
                     <animateTransform attributeName="transform" type="rotate" from={`0 ${OUT.x} ${OUT.y}`} to={`360 ${OUT.x} ${OUT.y}`} dur="20s" repeatCount="indefinite" />
                 </circle>
-                <text x={OUT.x} y={OUT.y + OUT.r + 24} textAnchor="middle" className="fill-ember font-mono" fontSize="10.5">
+                <text x={OUT.x} y={OUT.y + OUT.r + 24} textAnchor="middle" className="fill-accent font-mono" fontSize="10.5">
                     ŷ = &quot;ml_engineer&quot;
                 </text>
                 <text x={OUT.x} y={OUT.y + OUT.r + 38} textAnchor="middle" className="fill-ink4 font-mono" fontSize="9">
@@ -94,7 +94,7 @@ export default function NetworkDiagram() {
 
             {/* photo sits on the output neuron */}
             <div
-                className="absolute overflow-hidden rounded-full border-2 border-ember/60 bg-abyss shadow-glow"
+                className="absolute overflow-hidden rounded-full border-2 border-raised bg-surface shadow-lift ring-1 ring-ink/20"
                 style={{
                     left: `${((OUT.x - OUT.r) / 420) * 100}%`,
                     top: `${((OUT.y - OUT.r) / H) * 100}%`,
@@ -102,7 +102,7 @@ export default function NetworkDiagram() {
                     aspectRatio: "1",
                 }}
             >
-                <div className="absolute inset-0 flex items-center justify-center font-display text-xl font-bold text-ink">AK</div>
+                <div className="absolute inset-0 flex items-center justify-center font-display text-2xl italic text-ink">AK</div>
                 <img
                     src="/profile.jpg"
                     alt={profile.name}

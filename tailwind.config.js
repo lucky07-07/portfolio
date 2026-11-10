@@ -9,49 +9,47 @@ export default {
     extend: {
 
       colors: {
-        // Attention-heatmap palette (magma-like: plum black → violet → rose → ember → gold)
-        void:    "#0b0910",
-        abyss:   "#120e19",
-        panel:   "#181221",
-        line:    "rgba(220,200,255,0.10)",
+        // Warm paper + ink, one persimmon accent.
+        paper:   "#F2F1EB",
+        surface: "#E9E8E0",
+        soft:    "#EFEEE7",
+        raised:  "#F8F7F2",
+        char:    "#2B2A26",
+        fog:     "#B9B8AE",
 
-        ember:   "#ff8a4c",
-        rose:    "#f2508f",
-        violet:  "#9d7bff",
-        signal:  "#5eead4",
-        warn:    "#ffcc66",
+        ink:     "#181713",
+        ink2:    "#45443E",
+        ink3:    "#71706A",
+        ink4:    "#8F8E86",
 
-        ink:     "#f6f0fb",
-        ink2:    "#cfc5dd",
-        ink3:    "#9488aa",
-        ink4:    "#5f5475",
+        line:    "#DDDCD3",
+        line2:   "#D2D1C7",
+
+        accent:  "#C4532D",
+        moss:    "#2F7D62",
+        indigo:  "#4B55A8",
+        ochre:   "#A9791C",
       },
 
       boxShadow: {
-        card:  "0 18px 50px -20px rgba(0,0,0,0.75)",
-        glow:  "0 0 0 1px rgba(255,138,76,0.3), 0 0 40px -8px rgba(255,138,76,0.45)",
-        glowV: "0 0 0 1px rgba(157,123,255,0.3), 0 0 40px -8px rgba(157,123,255,0.45)",
+        card: "0 1px 0 rgba(255,255,255,0.7) inset, 0 24px 48px -32px rgba(24,23,19,0.28)",
+        lift: "0 1px 0 rgba(255,255,255,0.7) inset, 0 32px 60px -30px rgba(24,23,19,0.38)",
       },
 
       fontFamily: {
-        sans:    ["Inter", "system-ui", "sans-serif"],
-        display: ["Space Grotesk", "Inter", "sans-serif"],
-        mono:    ["JetBrains Mono", "ui-monospace", "monospace"],
+        sans:    ["Geist", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Instrument Serif", "Georgia", "serif"],
+        mono:    ["Geist Mono", "ui-monospace", "monospace"],
       },
 
       keyframes: {
-        blink:   { "0%,50%": { opacity: "1" }, "51%,100%": { opacity: "0" } },
-        spinSlow:{ to: { transform: "rotate(360deg)" } },
-        pulseDot:{ "0%,100%": { opacity: "1" }, "50%": { opacity: "0.35" } },
-        scan:    { "0%": { transform: "translateY(-100%)" }, "100%": { transform: "translateY(100%)" } },
+        blink:    { "0%,50%": { opacity: "1" }, "51%,100%": { opacity: "0" } },
+        pulseDot: { "0%,100%": { opacity: "1" }, "50%": { opacity: "0.35" } },
       },
 
       animation: {
         blink:    "blink 1s steps(1) infinite",
-        "spin-slow": "spinSlow 18s linear infinite",
-        "spin-rev":  "spinSlow 26s linear infinite reverse",
         pulseDot: "pulseDot 2s ease-in-out infinite",
-        scan:     "scan 6s linear infinite",
       },
 
     },

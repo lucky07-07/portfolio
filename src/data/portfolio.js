@@ -10,22 +10,30 @@ export const profile = {
     email: "anilkumarlucky07@gmail.com",
     github: GH,
     linkedin: "https://www.linkedin.com/in/anil-kumar-29884a17a/",
+    kaggle: "https://www.kaggle.com/anilkumarluck",
     resume: "/resume.pdf",
 };
 
-// Domain filters used on the Projects page.
-export const domains = [
-    { id: "all",    label: "All" },
-    { id: "cv",     label: "Computer Vision" },
-    { id: "nlp",    label: "NLP & LLMs" },
-    { id: "agents", label: "Agents & Systems" },
-    { id: "data",   label: "Applied ML & Analytics" },
+// Category filters used in the Projects section. A project can sit in more than one.
+export const categories = [
+    { id: "all",        label: "All" },
+    { id: "aiml",       label: "AI / ML" },
+    { id: "dl",         label: "Deep Learning" },
+    { id: "data",       label: "Data Science" },
+    { id: "blockchain", label: "Blockchain" },
+    { id: "research",   label: "Research" },
 ];
 
 export const projects = [
     {
         title: "Knee MRI Abnormality Detection",
-        domain: "cv",
+        categories: ["dl"],
+        glyph: "cv",
+        highlights: [
+            { value: "4,407", label: "MRI studies · 570 GB" },
+            { value: "0.93", label: "label quality vs gold" },
+            { value: "15", label: "models · 3 views × 5 folds" },
+        ],
         featured: true,
         metric: { value: "0.906", label: "private AUC · RSNA Kaggle" },
         description:
@@ -40,8 +48,39 @@ export const projects = [
         links: { github: `${GH}/knee-mri-abnormality-detection` },
     },
     {
+        title: "Kavach · Scam-Call Guardian",
+        categories: ["aiml", "blockchain"],
+        glyph: "wave",
+        featured: true,
+        highlights: [
+            { value: "22/22", label: "genuine calls left alone" },
+            { value: "9–12 s", label: "Telugu verdict" },
+            { value: "974,389", label: "Bitcoin block of the evidence seal" },
+        ],
+        metric: { value: "22/22", label: "genuine calls left alone · 8 agents" },
+        description:
+            "A second listener that catches scam calls and warns elderly listeners in Telugu and Hindi. Eight agents on Gnani AI speech and LLM models: the LLM argues, code decides, and the evidence is sealed on Bitcoin.",
+        problemStatement:
+            "An elderly Telugu or Hindi speaker on a scam call needs a warning in their own language, and the family needs to know at once. In early versions an LLM judge called every genuine call a scam (0 of 7 genuine calls left alone), so the verdict could not be left to the model.",
+        approach:
+            "Gnani Prisma transcribes the call and separates caller from listener. A Prosecutor and a Defender on self-hosted Evon each argue with quotes, and a code Judge accepts a claim only if the quote is the caller's own words, carries a cue for the tactic and is not negated. Timbre speaks the Telugu or Hindi warning, code builds the family alert and the 1930 cybercrime complaint, and the evidence packet is hashed, chained and timestamped on Bitcoin through OpenTimestamps. A read-only MCP server lets the family ask what happened afterwards.",
+        results:
+            "All test calls are synthetic and the samples are small. On 44 hand-written Telugu–English calls, 22 of 22 genuine calls were left alone and 16 of 22 scams were caught. End to end with real Evon, 3 of 3 Telugu calls and 5 of 6 English/Hinglish calls were judged correctly. Telugu verdicts arrive in 9–12 s. The 3 Nov evidence seal is confirmed on Bitcoin block 974,389. An RL policy for when to warn tied the Judge and is not used in the pipeline.",
+        tech: ["Gnani Prisma", "Evon LLM", "Timbre TTS", "Multi-agent", "MCP", "OpenTimestamps", "FastAPI", "llama.cpp"],
+        links: {
+            github: `${GH}/kavach-scam-call-guardian`,
+            demo: "https://kavach-scam-call-guardian.vercel.app",
+        },
+    },
+    {
         title: "AgroVision-7",
-        domain: "cv",
+        categories: ["dl","research"],
+        glyph: "cv",
+        highlights: [
+            { value: "97.48%", label: "test accuracy" },
+            { value: "0.975", label: "macro-F1" },
+            { value: "≥ 0.96", label: "every per-class accuracy" },
+        ],
         featured: true,
         metric: { value: "97.48%", label: "accuracy · 0.975 macro-F1" },
         description:
@@ -60,7 +99,13 @@ export const projects = [
     },
     {
         title: "KIC-COCO · Kannada Image Captioning",
-        domain: "nlp",
+        categories: ["dl","research"],
+        glyph: "nlp",
+        highlights: [
+            { value: "250K", label: "captions · 50K images" },
+            { value: "68.65", label: "char-level SacreBLEU-4" },
+            { value: "84.02", label: "back-translation BERTScore" },
+        ],
         featured: true,
         metric: { value: "250K", label: "Kannada captions · 6 models" },
         description:
@@ -79,7 +124,13 @@ export const projects = [
     },
     {
         title: "Sentient",
-        domain: "agents",
+        categories: ["aiml"],
+        glyph: "agents",
+        highlights: [
+            { value: "8", label: "live sources" },
+            { value: "3", label: "revision rounds at most" },
+            { value: "RAG", label: "inline citations" },
+        ],
         metric: { value: "8", label: "live sources · self-verifying" },
         description:
             "“The AI that watches AI — and audits itself.” A self-running intelligence terminal that monitors the AI ecosystem and publishes a grounded daily briefing through a draft → verify → revise agent loop.",
@@ -94,7 +145,13 @@ export const projects = [
     },
     {
         title: "SustainSched · Carbon-Aware K8s Agent",
-        domain: "agents",
+        categories: ["aiml","research"],
+        glyph: "agents",
+        highlights: [
+            { value: "0.917", label: "R² · XGBoost" },
+            { value: "7.16", label: "MAE · held-out" },
+            { value: "14", label: "UK regions ranked" },
+        ],
         metric: { value: "R² 0.917", label: "carbon forecast · XGBoost" },
         description:
             "A lightweight autonomous AI agent that schedules Kubernetes workloads with explicit awareness of regional grid carbon intensity.",
@@ -112,7 +169,13 @@ export const projects = [
     },
     {
         title: "Geospatial Monitoring System",
-        domain: "agents",
+        categories: ["aiml"],
+        glyph: "agents",
+        highlights: [
+            { value: "126", label: "satellites per cycle" },
+            { value: "1,512", label: "aircraft per cycle" },
+            { value: "6", label: "ML tasks" },
+        ],
         metric: { value: "1.5K+", label: "aircraft tracked live" },
         description:
             "A real-time geospatial intelligence platform tracking satellites, aircraft and weather, streamed through Kafka into PostGIS, with predictive ML and a Spark analytics layer.",
@@ -130,7 +193,13 @@ export const projects = [
     },
     {
         title: "COD Return-Risk Scorer",
-        domain: "data",
+        categories: ["data"],
+        glyph: "data",
+        highlights: [
+            { value: "₹29,481", label: "saved per 10K orders" },
+            { value: "0.806", label: "ROC-AUC" },
+            { value: "0.37", label: "cost-optimal threshold" },
+        ],
         metric: { value: "₹29.5K", label: "saved per 10K orders" },
         description:
             "Cost-sensitive return-to-origin risk scorer for Indian cash-on-delivery orders. CatBoost + SHAP served with FastAPI, leakage-controlled and time-aware. Razorpay AI Buildathon 2026.",
@@ -148,7 +217,13 @@ export const projects = [
     },
     {
         title: "EV Battery Analytics",
-        domain: "data",
+        categories: ["data"],
+        glyph: "data",
+        highlights: [
+            { value: "2.1%", label: "mean SoC error" },
+            { value: "1.09M", label: "samples · 70 drives" },
+            { value: "43%", label: "more energy per km in winter" },
+        ],
         metric: { value: "2.1%", label: "SoC error · R² 0.96" },
         description:
             "End-to-end data and AI pipeline on 70 real BMW i3 drives (1.09M samples): state-of-charge estimation, energy prediction, anomaly detection, Power BI and a local LLM assistant.",
@@ -163,7 +238,13 @@ export const projects = [
     },
     {
         title: "AppealIQ · Health-Plan Appeals",
-        domain: "data",
+        categories: ["data"],
+        glyph: "data",
+        highlights: [
+            { value: "0.736", label: "ROC-AUC · unseen years" },
+            { value: "90.5%", label: "top decile overturned" },
+            { value: "89.1%", label: "NLP routing accuracy" },
+        ],
         metric: { value: "90.5%", label: "overturn rate · top-risk decile" },
         description:
             "Power BI, ML, NLP and anomaly detection on 42,710 real California Independent Medical Review decisions: which health-plan denials get overturned.",
@@ -248,6 +329,24 @@ export const hackathons = [
         links: [],
     },
     {
+        event: "Gnani AI Great Indian AI Internship Challenge 2026",
+        track: "Built entirely on Gnani models · Prisma, Evon, Timbre",
+        format: "Challenge",
+        year: "2026",
+        project: "Kavach",
+        summary:
+            "A scam-call guardian for elderly Telugu and Hindi speakers: eight agents warn the listener, alert the family, draft the cybercrime complaint and seal the evidence on Bitcoin.",
+        stats: [
+            { value: "22/22", label: "genuine calls left alone" },
+            { value: "9–12 s", label: "Telugu verdict" },
+            { value: "8", label: "agents" },
+        ],
+        links: [
+            { label: "Live site", href: "https://kavach-scam-call-guardian.vercel.app" },
+            { label: "Code", href: `${GH}/kavach-scam-call-guardian` },
+        ],
+    },
+    {
         event: "Razorpay AI Buildathon 2026",
         track: "Track 02 · AI Risk Manager",
         format: "Buildathon",
@@ -282,5 +381,80 @@ export const hackathons = [
             { label: "Competition", href: "https://www.kaggle.com/competitions/rsna-knee-abnormality-detection" },
             { label: "Code", href: `${GH}/knee-mri-abnormality-detection` },
         ],
+    },
+];
+
+// Open-source contributions: pull requests and bug reports on other people's
+// projects. Every entry is a real thread on GitHub; diff sizes are GitHub's numbers.
+export const contributions = [
+    {
+        repo: "milind-soni/OpenMausBot",
+        about: "Open-source bot workspace with a virtual machine bots can use",
+        kind: "Pull request",
+        number: 4290,
+        status: "Merged",
+        title: "Skill commands run only from words a person typed",
+        summary:
+            "Closes a security gap: a /name skill command inside a webhook payload, another bot's message or an app's text no longer runs as if the user had typed it.",
+        diff: { add: 417, del: 57, files: 15 },
+        href: "https://github.com/milind-soni/OpenMausBot/pull/4290",
+    },
+    {
+        repo: "milind-soni/OpenMausBot",
+        about: "Open-source bot workspace with a virtual machine bots can use",
+        kind: "Pull request",
+        number: 4289,
+        status: "Merged",
+        title: "Cycle bots with Ctrl+Shift+] / [ on Windows and Linux",
+        summary:
+            "The bot-cycling shortcut matched only ] and [. With Shift held those keys arrive as } and {, so the shortcut now accepts both forms.",
+        diff: { add: 33, del: 3, files: 3 },
+        href: "https://github.com/milind-soni/OpenMausBot/pull/4289",
+    },
+    {
+        repo: "milind-soni/OpenMausBot",
+        about: "Open-source bot workspace with a virtual machine bots can use",
+        kind: "Pull request",
+        number: 4285,
+        status: "Merged",
+        title: "Open bots in sidebar order with Cmd+1..9",
+        summary:
+            "Number shortcuts now follow the order the sidebar actually shows, read from its rendered rows, and keep the old order when no sidebar is on screen.",
+        diff: { add: 107, del: 4, files: 4 },
+        href: "https://github.com/milind-soni/OpenMausBot/pull/4285",
+    },
+    {
+        repo: "kornia/kornia",
+        about: "Geometric computer vision library for spatial AI",
+        kind: "Pull request",
+        number: 6222,
+        status: "In review",
+        title: "Default the hub cache directories to an absolute per-user path",
+        summary:
+            "The hub, model and ONNX cache directories defaulted to paths relative to the working directory. This change points them at one absolute per-user location.",
+        diff: { add: 103, del: 17, files: 8 },
+        href: "https://github.com/kornia/kornia/pull/6222",
+    },
+    {
+        repo: "jax-ml/jax",
+        about: "Composable transformations of Python + NumPy programs",
+        kind: "Bug report",
+        number: 41861,
+        status: "Open",
+        title: "jnp.spacing returns a negative value for -0.0",
+        summary:
+            "A reproducible mismatch with NumPy: numpy.spacing(-0.0) is positive, while jnp.spacing(-0.0) comes back negative.",
+        href: "https://github.com/jax-ml/jax/issues/41861",
+    },
+    {
+        repo: "huggingface/lerobot",
+        about: "Robot learning library and datasets from Hugging Face",
+        kind: "Bug report",
+        number: 5039,
+        status: "Open",
+        title: "berkeley_autolab_ur5 v3.0: 28 episodes assigned to the wrong video file",
+        summary:
+            "A dataset audit showing that 28 of 31 video files are missing their last episode, so those episodes' timestamps point past the end of the video.",
+        href: "https://github.com/huggingface/lerobot/issues/5039",
     },
 ];

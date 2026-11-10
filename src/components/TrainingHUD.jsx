@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const EPOCH_OF = { about: 1, projects: 2, hackathons: 3, research: 4, skills: 5, education: 6, contact: 7 };
+const EPOCH_OF = { about: 1, projects: 2, opensource: 3, hackathons: 4, research: 5, skills: 6, education: 7, contact: 8 };
 
 // Synthetic but plausible training curves, parameterised by scroll progress t ∈ [0, 1].
 const lossAt = (t) => 2.3 * Math.exp(-4.2 * t) + 0.04 + 0.025 * Math.sin(t * 40) * (1 - t);
@@ -38,31 +38,24 @@ export default function TrainingHUD({ activeSection }) {
         <>
             {/* thin progress bar, all sizes */}
             <div className="fixed left-0 right-0 top-0 z-50 h-[2px] bg-transparent">
-                <div className="h-full bg-gradient-to-r from-ember to-violet shadow-[0_0_10px_#ff8a4c]" style={{ width: `${t * 100}%` }} />
+                <div className="h-full bg-accent" style={{ width: `${t * 100}%` }} />
             </div>
 
             {/* HUD, desktop only */}
-            <div className="fixed bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-5 rounded-2xl border border-line bg-void/80 px-5 py-2.5 font-mono text-[11px] shadow-card backdrop-blur-xl whitespace-nowrap lg:flex">
-                <span className="text-ink3">
-                    epoch <span className="text-ink">{epoch}</span>/7
+            <div className="fixed bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-5 rounded-full border border-white/10 bg-char/95 px-6 py-2.5 font-mono text-[11px] text-fog shadow-lift backdrop-blur-xl whitespace-nowrap lg:flex">
+                <span>
+                    epoch <span className="text-paper">{epoch}</span>/8
                 </span>
 
-                <span className="flex items-center gap-2">
-                    <span className="relative h-1.5 w-28 overflow-hidden rounded-full bg-white/[0.07]">
-                        <span className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-ember to-violet" style={{ width: `${t * 100}%` }} />
-                    </span>
-                    <span className="w-8 text-ink3">{Math.round(t * 100)}%</span>
+                <span>
+                    loss <span className="text-[#F0A283]">{lossAt(t).toFixed(4)}</span>
                 </span>
-
-                <span className="text-ink4">
-                    loss <span className="text-warn">{lossAt(t).toFixed(4)}</span>
-                </span>
-                <span className="text-ink4">
-                    acc <span className="text-signal">{accAt(t).toFixed(4)}</span>
+                <span>
+                    acc <span className="text-[#9BD3BC]">{accAt(t).toFixed(4)}</span>
                 </span>
 
                 <svg width={W} height={HGT} className="overflow-visible" aria-hidden="true">
-                    <path d={path} fill="none" stroke="#ffcc66" strokeWidth="1.3" strokeLinejoin="round" />
+                    <path d={path} fill="none" stroke="#F0A283" strokeWidth="1.3" strokeLinejoin="round" />
                 </svg>
             </div>
         </>

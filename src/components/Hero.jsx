@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Download, ChevronDown } from "lucide-react";
-import { profile } from "../data/portfolio";
+import { ArrowRight, FileText, ArrowDown } from "lucide-react";
 import { TokenAttention } from "./AttentionViz";
 import AskConsole from "./AskConsole";
 
@@ -34,76 +33,87 @@ function useTypewriter(words, speed = 70, pause = 1400) {
     return text;
 }
 
+// Staggered blur-in used for every hero element.
+const rise = (delay) => ({
+    initial: { opacity: 0, y: 22, filter: "blur(12px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+    transition: { duration: 0.9, delay, ease: [0.2, 0.7, 0.2, 1] },
+});
+
 export default function Hero({ onNavigate }) {
     const role = useTypewriter(ROLES);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative flex min-h-screen flex-col justify-center pb-16 pt-32"
-        >
-            <div className="pointer-events-none absolute right-0 top-1/4 h-96 w-96 rounded-full bg-rose/10 blur-[130px]" />
-            <div className="pointer-events-none absolute bottom-10 left-0 h-80 w-80 rounded-full bg-ember/10 blur-[130px]" />
+        <div className="relative pb-10">
+            {/* INTRO */}
+            <div className="flex min-h-[92vh] flex-col items-center justify-center pb-16 pt-32 text-center">
+                <motion.p {...rise(0.05)} className="inline-flex items-center gap-2.5 rounded-full border border-line2 bg-raised/70 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-ink3 backdrop-blur">
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulseDot" />
+                    M.Tech Data Science · Amrita
+                </motion.p>
 
-            <div className="relative grid items-center gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
-                {/* LEFT */}
-                <div>
-                    <p className="font-mono text-[12.5px] text-ink4">
-                        <span className="text-ember">●</span> Attention(Q, K, V) = softmax(QKᵀ/√d)·V
-                    </p>
+                <h1 className="mt-9 text-[4rem] leading-[0.92] tracking-[-0.02em] sm:text-[6.5rem] lg:text-[8.5rem]">
+                    <motion.span {...rise(0.15)} className="block">Anil Kumar</motion.span>
+                    <motion.span {...rise(0.3)} className="mt-2 block text-[0.52em] italic leading-[1.1] text-ink3">
+                        AI / ML Engineer
+                    </motion.span>
+                </h1>
 
-                    <h1 className="mt-7 text-[2.8rem] font-bold leading-[0.98] tracking-[-0.045em] sm:text-[3.8rem] lg:text-[4.6rem]">
-                        Anil Kumar
-                        <span className="mt-3 block text-grad">AI / ML Engineer</span>
-                    </h1>
+                <motion.p {...rise(0.45)} className="mt-9 font-mono text-[13.5px] text-ink3">
+                    attending to <span className="text-ink4">→</span>{" "}
+                    <span className="text-accent">{role}</span>
+                    <span className="ml-0.5 inline-block h-[15px] w-[2px] translate-y-[2px] bg-accent animate-blink" />
+                </motion.p>
 
-                    <p className="mt-7 font-mono text-[15px] text-ink2">
-                        <span className="text-ink4">&gt;&gt;&gt;</span> attend_to{" "}
-                        <span className="text-ink4">=</span> <span className="text-ember">&quot;{role}</span>
-                        <span className="ml-px inline-block h-4 w-[7px] translate-y-[2px] bg-ember animate-blink" />
-                        <span className="text-ember">&quot;</span>
-                    </p>
+                <motion.p {...rise(0.55)} className="mt-6 max-w-[620px] text-[17px] leading-[1.7] text-ink2 sm:text-[18px]">
+                    I build models that see, read and reason:
+                    LLM-labelled medical imaging, transformer ensembles and self-verifying RAG agents,
+                    each evaluated honestly on held-out data.
+                </motion.p>
 
-                    <p className="mt-6 max-w-xl text-[17px] leading-[1.7] text-ink2">
-                        M.Tech Data Science at Amrita. I build models that see, read and reason:
-                        LLM-labelled medical imaging, transformer ensembles and self-verifying RAG agents,
-                        each evaluated honestly on held-out data.
-                    </p>
+                <motion.div {...rise(0.65)} className="mt-10 flex flex-wrap justify-center gap-3">
+                    <button onClick={() => onNavigate("projects")} className="btn-primary">
+                        View projects <ArrowRight size={15} />
+                    </button>
+                    <button onClick={() => onNavigate("research")} className="btn-ghost">
+                        <FileText size={15} /> Papers
+                    </button>
+                </motion.div>
 
-                    <div className="mt-10 flex flex-wrap gap-3">
-                        <button onClick={() => onNavigate("projects")} className="btn-primary">
-                            View projects <ArrowRight size={16} />
-                        </button>
-                        <button onClick={() => onNavigate("research")} className="btn-ghost">
-                            <FileText size={16} /> Papers
-                        </button>
-                        <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                            <Download size={16} /> CV
-                        </a>
-                    </div>
-                </div>
-
-                {/* RIGHT */}
-                <AskConsole onNavigate={onNavigate} />
+                <motion.button
+                    {...rise(0.85)}
+                    onClick={() => onNavigate("about")}
+                    className="mt-16 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink4 hover:text-accent"
+                >
+                    forward pass <ArrowDown size={13} className="animate-bounce" />
+                </motion.button>
             </div>
+
+            {/* CONSOLE */}
+            <motion.div
+                initial={{ opacity: 0, y: 26, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
+                className="mx-auto max-w-[880px]"
+            >
+                <AskConsole onNavigate={onNavigate} />
+            </motion.div>
 
             {/* self-attention over a sentence */}
-            <div className="relative mt-20">
-                <p className="mb-2 text-center font-mono text-[11.5px] text-ink4">
-                    self-attention · hover a token to set the query
-                </p>
-                <TokenAttention />
-            </div>
-
-            <button
-                onClick={() => onNavigate("about")}
-                className="mx-auto mt-14 flex flex-col items-center gap-1 font-mono text-[11px] text-ink4 hover:text-ember"
+            <motion.div
+                initial={{ opacity: 0, y: 26 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
+                className="mx-auto mt-5 max-w-[880px] rounded-[22px] border border-line bg-soft/60 px-4 pb-10 pt-6 sm:px-8"
             >
-                forward pass
-                <ChevronDown size={16} className="animate-bounce" />
-            </button>
-        </motion.div>
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <p className="eyebrow">Self-attention · hover a token to set the query</p>
+                    <p className="font-mono text-[11px] text-ink4">Attention(Q, K, V) = softmax(QKᵀ/√d)·V</p>
+                </div>
+                <TokenAttention />
+            </motion.div>
+        </div>
     );
 }

@@ -1,18 +1,8 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Mail, Copy, Check } from "lucide-react";
+import { ArrowUpRight, Mail, Copy, Check, Award } from "lucide-react";
 import SectionHeader from "./SectionHeader";
-import { GithubMark } from "./Projects";
+import { GithubMark, LinkedinMark } from "./Icons";
 import { profile } from "../data/portfolio";
-
-// lucide-react (this version) ships no LinkedIn brand glyph either.
-function LinkedinMark({ size = 16 }) {
-    return (
-        <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
-            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
-        </svg>
-    );
-}
 
 export default function Contact() {
     const [copied, setCopied] = useState(false);
@@ -21,6 +11,7 @@ export default function Contact() {
         { label: "Email",    value: profile.email,                          href: `mailto:${profile.email}`, icon: Mail },
         { label: "LinkedIn", value: "in/anil-kumar-29884a17a",              href: profile.linkedin,          icon: LinkedinMark },
         { label: "GitHub",   value: "github.com/lucky07-07",                href: profile.github,            icon: GithubMark },
+        { label: "Kaggle",   value: "kaggle.com/anilkumarluck",             href: profile.kaggle,            icon: Award },
     ];
 
     const copyEmail = async () => {
@@ -32,53 +23,50 @@ export default function Contact() {
     };
 
     return (
-        <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-        >
-            <SectionHeader index="07" tag="contact" title="Let's build something intelligent." />
+        <div>
+            <SectionHeader index="08" tag="contact" title={<>Let&apos;s build something <span className="em">intelligent.</span></>} />
 
-            <div className="panel overflow-hidden p-8 sm:p-12">
-                <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-ember/15 blur-[90px]" />
-                <div className="relative z-10 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+            <div className="card-dark overflow-hidden p-7 sm:p-12">
+                <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
                     <div>
-                        <p className="text-[18px] leading-[1.7] text-ink2">
-                            Open to <span className="text-ink">AI/ML engineering roles, internships</span> and{" "}
-                            <span className="text-ink">research collaborations</span> in computer vision, medical
+                        <p className="inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.14em] text-fog">
+                            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulseDot" /> Open to work
+                        </p>
+                        <p className="mt-6 font-display text-[1.75rem] leading-[1.25] text-fog sm:text-[2.2rem]">
+                            Open to <span className="text-paper">AI/ML engineering roles, internships</span> and{" "}
+                            <span className="text-paper">research collaborations</span> in computer vision, medical
                             imaging, LLMs and agentic systems.
                         </p>
-                        <div className="mt-6 flex flex-wrap gap-3">
-                            <a href={`mailto:${profile.email}`} className="btn-primary"><Mail size={15} /> Send an email</a>
-                            <button onClick={copyEmail} className="btn-ghost">
-                                {copied ? <Check size={15} className="text-signal" /> : <Copy size={15} />}
+                        <div className="mt-9 flex flex-wrap gap-3">
+                            <button onClick={copyEmail} className="btn-light">
+                                {copied ? <Check size={15} /> : <Copy size={15} />}
                                 {copied ? "Copied" : "Copy address"}
                             </button>
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col">
                         {contacts.map(({ label, value, href, icon: Icon }) => (
                             <a
                                 key={label}
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group flex items-center gap-4 rounded-xl border border-line bg-void/50 px-5 py-4 transition-colors hover:border-ember/40"
+                                className="group flex items-center gap-4 border-t border-white/10 py-5 last:border-b"
                             >
-                                <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-ember">
-                                    <Icon size={16} />
+                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-paper transition-colors group-hover:border-accent group-hover:bg-accent">
+                                    <Icon size={15} />
                                 </span>
                                 <div className="min-w-0 flex-1">
-                                    <p className="font-mono text-[10px] uppercase tracking-wider text-ink4">{label}</p>
-                                    <p className="truncate text-sm text-ink">{value}</p>
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-fog/70">{label}</p>
+                                    <p className="mt-0.5 truncate text-[15px] text-paper">{value}</p>
                                 </div>
-                                <ArrowUpRight size={15} className="text-ink4 transition-colors group-hover:text-ember" />
+                                <ArrowUpRight size={16} className="shrink-0 text-fog transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-paper" />
                             </a>
                         ))}
                     </div>
                 </div>
             </div>
-        </motion.section>
+        </div>
     );
 }

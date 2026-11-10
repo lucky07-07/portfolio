@@ -8,18 +8,18 @@ const PRINCIPLES = [
     { k: "explainable", v: "SHAP, Grad-CAM and cited answers." },
 ];
 
-export default function About({ onNavigate }) {
+export default function About() {
     return (
         <div>
             <SectionHeader
                 index="01"
                 tag="about"
-                title={<>Engineer by training, <span className="text-grad">researcher by habit.</span></>}
+                title={<>Engineer by training, <span className="em">researcher by habit.</span></>}
             />
 
-            <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div className="grid items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
                 <div>
-                    <div className="space-y-5 text-[17px] leading-[1.75] text-ink2">
+                    <div className="space-y-5 text-[17px] leading-[1.75] text-ink2 sm:text-[18px]">
                         <p>
                             I&apos;m Anil, an AI / ML Engineer doing an M.Tech in Data Science at Amrita Vishwa
                             Vidyapeetham, Bengaluru. I work across computer vision and medical imaging,
@@ -31,29 +31,28 @@ export default function About({ onNavigate }) {
                             COCO-scale Kannada captioning dataset, or teaching an agent to audit its own claims.
                         </p>
                     </div>
-
-                    <div className="mt-9 overflow-x-auto rounded-2xl border border-line bg-void/60 p-5 font-mono text-[13px] leading-8">
-                        <p className="text-ink4"># config.yaml</p>
-                        {PRINCIPLES.map(({ k, v }) => (
-                            <p key={k} className="whitespace-nowrap text-ink3">
-                                <span className="text-rose">{k}</span>
-                                <span className="text-ink4">: </span>
-                                <span className="text-ink2">&quot;{v}&quot;</span>
-                            </p>
-                        ))}
-                    </div>
-
-                    <div className="mt-9 flex flex-wrap gap-3">
-                        <button onClick={() => onNavigate("projects")} className="btn-primary">View projects</button>
-                        <button onClick={() => onNavigate("contact")} className="btn-ghost">Get in touch</button>
-                    </div>
                 </div>
 
-                <div className="panel p-6 sm:p-8">
-                    <p className="mb-4 font-mono text-[11.5px] text-ink4">
+                <div className="card p-6 sm:p-8">
+                    <p className="mb-4 font-mono text-[11px] text-ink4">
                         model.summary() <span className="text-ink3">· inputs → hidden → me</span>
                     </p>
                     <NetworkDiagram />
+                </div>
+            </div>
+
+            {/* operating principles */}
+            <div className="mt-14">
+                <p className="eyebrow mb-4">config.yaml · operating principles</p>
+                <div className="grid overflow-hidden rounded-[22px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4" style={{ gap: 1 }}>
+                    {PRINCIPLES.map(({ k, v }, i) => (
+                        <div key={k} className="bg-paper p-6 transition-colors hover:bg-raised sm:p-7">
+                            <p className="font-mono text-[11px] text-accent">
+                                <span className="text-ink4">0{i + 1} · </span>{k}
+                            </p>
+                            <p className="mt-8 font-display text-[1.45rem] leading-[1.2] text-ink">{v}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

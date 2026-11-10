@@ -1,22 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-// Magma-like colour ramp for attention weights in [0, 1].
-const RAMP = [
-    [24, 18, 33],
-    [86, 36, 120],
-    [182, 54, 121],
-    [242, 80, 143],
-    [255, 138, 76],
-    [255, 204, 102],
-];
-function heat(w) {
-    const x = Math.min(1, Math.max(0, w)) * (RAMP.length - 1);
-    const i = Math.min(RAMP.length - 2, Math.floor(x));
-    const t = x - i;
-    const c = RAMP[i].map((v, k) => Math.round(v + (RAMP[i + 1][k] - v) * t));
-    return `rgb(${c.join(",")})`;
-}
-
 const softmax = (row) => {
     const m = Math.max(...row);
     const e = row.map((v) => Math.exp(v - m));
@@ -65,7 +48,7 @@ export function TokenAttention() {
     const ARC_H = 96;
 
     return (
-        <div className="overflow-x-auto pb-2">
+        <div className="overflow-x-auto overflow-y-hidden pb-7">
             <div ref={wrap} className="relative mx-auto w-max min-w-full px-2" style={{ paddingTop: ARC_H }}>
                 <svg className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-visible" aria-hidden="true">
                     {xs.length === TOKENS.length &&
@@ -79,9 +62,9 @@ export function TokenAttention() {
                                     key={k}
                                     d={`M${x1},${ARC_H} Q${(x1 + x2) / 2},${ARC_H - h * 2} ${x2},${ARC_H}`}
                                     fill="none"
-                                    stroke={heat(0.35 + w[k] * 1.6)}
-                                    strokeOpacity={0.25 + w[k] * 2}
-                                    strokeWidth={0.8 + w[k] * 9}
+                                    stroke="#C4532D"
+                                    strokeOpacity={Math.min(0.95, 0.12 + w[k] * 2.4)}
+                                    strokeWidth={0.8 + w[k] * 8}
                                     strokeLinecap="round"
                                     className="transition-all duration-500"
                                 />
@@ -89,7 +72,7 @@ export function TokenAttention() {
                         })}
                 </svg>
 
-                <div className="flex gap-2 sm:gap-3">
+                <div className="flex justify-center gap-2 sm:gap-3">
                     {TOKENS.map((tok, k) => (
                         <button
                             key={tok}
@@ -98,10 +81,10 @@ export function TokenAttention() {
                             onMouseLeave={() => setPinned(false)}
                             onFocus={() => { setPinned(true); setFocus(k); }}
                             onBlur={() => setPinned(false)}
-                            className={`relative rounded-lg border px-3 py-2 font-mono text-[13px] sm:px-4 sm:text-[14px] ${
+                            className={`relative rounded-full border px-3.5 py-2 font-mono transition-colors text-[13px] sm:px-4 sm:text-[14px] ${
                                 k === focus
-                                    ? "border-ember/60 bg-ember/[0.12] text-ember"
-                                    : "border-line bg-void/60 text-ink2 hover:text-ink"
+                                    ? "border-ink bg-ink text-paper"
+                                    : "border-line2 bg-raised text-ink2 hover:border-ink hover:text-ink"
                             }`}
                         >
                             {tok}
