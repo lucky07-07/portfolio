@@ -1,4 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
+import { useMachine } from "../lib/machine";
+import { attention } from "../lib/machines";
 
 const softmax = (row) => {
     const m = Math.max(...row);
@@ -14,12 +17,15 @@ const LINKS = { 0: [1], 1: [0, 2], 2: [4, 5, 7, 1], 4: [2, 5], 5: [2, 4, 7], 7: 
 const weightsFor = (q) =>
     softmax(TOKENS.map((_, k) => (k === q ? -9 : (LINKS[q]?.includes(k) ? 2.2 : 0) - Math.abs(q - k) * 0.25)));
 
+// The query walks through the content words, starting at "models".
+const ATTENTION = attention([2, 5, 7, 4, 1], 2);
+
 export function TokenAttention() {
     const wrap = useRef(null);
     const refs = useRef([]);
     const [xs, setXs] = useState([]);
-    const [focus, setFocus] = useState(2);
-    const [pinned, setPinned] = useState(false);
+    const reduced = useReducedMotion();
+    const [mode, send, { focus }] = useMachine(ATTENTION);
 
     useLayoutEffect(() => {
         const measure = () => {
@@ -36,19 +42,18 @@ export function TokenAttention() {
         return () => ro.disconnect();
     }, []);
 
-    // Walk through the content words while the visitor is not hovering.
+    // Walk through the content words while nobody is holding a token.
     useEffect(() => {
-        if (pinned) return;
-        const order = [2, 5, 7, 4, 1];
-        const t = setInterval(() => setFocus((f) => order[(order.indexOf(f) + 1) % order.length]), 1900);
+        if (mode !== "touring" || reduced) return;
+        const t = setInterval(() => send("STEP"), 1900);
         return () => clearInterval(t);
-    }, [pinned]);
+    }, [mode, reduced, send]);
 
     const w = weightsFor(focus);
     const ARC_H = 96;
 
     return (
-        <div className="overflow-x-auto overflow-y-hidden pb-7">
+        <div data-state={mode} className="overflow-x-auto overflow-y-hidden pb-7">
             <div ref={wrap} className="relative mx-auto w-max min-w-full px-2" style={{ paddingTop: ARC_H }}>
                 <svg className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-visible" aria-hidden="true">
                     {xs.length === TOKENS.length &&
@@ -77,10 +82,11 @@ export function TokenAttention() {
                         <button
                             key={tok}
                             ref={(el) => (refs.current[k] = el)}
-                            onMouseEnter={() => { setPinned(true); setFocus(k); }}
-                            onMouseLeave={() => setPinned(false)}
-                            onFocus={() => { setPinned(true); setFocus(k); }}
-                            onBlur={() => setPinned(false)}
+                            type="button"
+                            onMouseEnter={() => send({ type: "HOVER", token: k })}
+                            onMouseLeave={() => send("UNHOVER")}
+                            onFocus={() => send({ type: "FOCUS", token: k })}
+                            onBlur={() => send("BLUR")}
                             className={`relative rounded-full border px-3.5 py-2 font-mono transition-colors text-[13px] sm:px-4 sm:text-[14px] ${
                                 k === focus
                                     ? "border-ink bg-ink text-paper"

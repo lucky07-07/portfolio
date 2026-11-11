@@ -1,5 +1,6 @@
 import { ArrowUpRight, BadgeCheck } from "lucide-react";
 import { devicon } from "../data/logos";
+import Logo from "./Logo";
 
 const AWS_LOGO = devicon("amazonwebservices/amazonwebservices-original-wordmark.svg");
 const MATLAB_LOGO = devicon("matlab/matlab-original.svg");
@@ -48,7 +49,7 @@ export default function Certifications() {
                             className={`card card-hover group flex items-center gap-5 p-5 sm:p-6 ${c.featured ? "!border-ink/40" : ""}`}
                         >
                             <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-line bg-white p-2.5">
-                                <img src={c.logo} alt="" className="h-full w-full object-contain" loading="lazy" />
+                                <Logo src={c.logo} className="h-full w-full object-contain" fallback={<BadgeCheck size={22} className="text-ink3" />} />
                             </span>
                             <div className="min-w-0 flex-1">
                                 <p className="flex items-center gap-1.5 font-display text-[1.35rem] leading-[1.15] text-ink">

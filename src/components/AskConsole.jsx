@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import { useReducedMotion } from "framer-motion";
 import { CornerDownLeft } from "lucide-react";
+import { useMachine } from "../lib/machine";
+import { stream } from "../lib/machines";
 
 // Pre-written, factual answers streamed like an LLM response, each grounded
 // in a section of the page (the "sources" act like RAG citations).
@@ -34,27 +37,24 @@ const QA = [
 const tokenize = (s) => s.match(/\S+\s*/g) ?? [];
 
 export default function AskConsole({ onNavigate }) {
-    const [active, setActive] = useState(0);
-    const [shown, setShown] = useState(0);
-    const timer = useRef(null);
+    const reduced = useReducedMotion();
+    const [state, send, { question: active, shown }] = useMachine(stream);
 
     const tokens = tokenize(QA[active].a);
-    const done = shown >= tokens.length;
+    const total = tokens.length;
+    const done = state === "done";
 
-    // Stream tokens with a slightly irregular cadence, like real sampling.
+    // One TICK per token, with a slightly irregular cadence, like real sampling.
     useEffect(() => {
-        let n = 0;
-        const tick = () => {
-            n += 1;
-            setShown(n);
-            if (n < tokens.length) timer.current = setTimeout(tick, 35 + ((n * 37) % 60));
-        };
-        timer.current = setTimeout(tick, 350);
-        return () => clearTimeout(timer.current);
-    }, [active, tokens.length]);
+        if (done) return;
+        if (reduced) { send({ type: "REVEAL", total }); return; }
+        const delay = state === "waiting" ? 350 : 35 + ((shown * 37) % 60);
+        const t = setTimeout(() => send({ type: "TICK", total }), delay);
+        return () => clearTimeout(t);
+    }, [state, shown, total, done, reduced, send]);
 
     return (
-        <div className="card flex flex-col overflow-hidden text-left">
+        <div data-state={state} className="card flex flex-col overflow-hidden text-left">
             <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-3.5 font-mono text-[11px] sm:px-7">
                 <span className="flex items-center gap-2 text-ink">
                     <span className="h-2 w-2 rounded-full bg-moss animate-pulseDot" />
@@ -102,7 +102,9 @@ export default function AskConsole({ onNavigate }) {
                 {QA.map((item, i) => (
                     <button
                         key={item.q}
-                        onClick={() => { if (i !== active) { setShown(0); setActive(i); } }}
+                        type="button"
+                        aria-pressed={i === active}
+                        onClick={() => send({ type: "ASK", question: i })}
                         className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[13px] transition-colors ${
                             i === active
                                 ? "border-ink bg-ink text-paper"

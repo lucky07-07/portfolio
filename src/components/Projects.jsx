@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, X, FileText, PlayCircle } from "lucide-react";
@@ -6,6 +6,8 @@ import SectionHeader from "./SectionHeader";
 import ProjectGlyph from "./ProjectGlyph";
 import { GithubMark } from "./Icons";
 import { projects, categories, contributions } from "../data/portfolio";
+import { useMachine } from "../lib/machine";
+import { dialog } from "../lib/machines";
 
 const CATEGORY_DOT = {
     dl:         "bg-accent",
@@ -68,20 +70,34 @@ function ProjectLinks({ links, size = 11 }) {
 
 export default function Projects({ onNavigate }) {
     const [filter, setFilter] = useState("all");
-    const [active, setActive] = useState(null);
+    const [modal, send, { item }] = useMachine(dialog);
+    const active = modal === "open" ? item : null;
+    const opener = useRef(null);      // the card that opened the dialog
+    const closeButton = useRef(null);
+
+    const open = (project, card) => {
+        opener.current = card;
+        send({ type: "OPEN", item: project });
+    };
+    const close = () => send("CLOSE");
 
     const visible = filter === "all" ? projects : projects.filter((p) => p.categories.includes(filter));
 
     useEffect(() => {
         if (!active) return;
-        const onKey = (e) => e.key === "Escape" && setActive(null);
+        // While open: Escape closes, the page behind stops scrolling, and focus
+        // moves into the dialog, then back to the card that opened it.
+        const onKey = (e) => e.key === "Escape" && send("CLOSE");
+        const card = opener.current;
         window.addEventListener("keydown", onKey);
-        document.body.style.overflow = "hidden";
+        document.body.classList.add("overflow-hidden");
+        closeButton.current?.focus({ preventScroll: true });
         return () => {
             window.removeEventListener("keydown", onKey);
-            document.body.style.overflow = "";
+            document.body.classList.remove("overflow-hidden");
+            card?.focus({ preventScroll: true });
         };
-    }, [active]);
+    }, [active, send]);
 
     return (
         <div>
@@ -135,8 +151,8 @@ export default function Projects({ onNavigate }) {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.97 }}
                             transition={{ duration: 0.3 }}
-                            onClick={() => setActive(p)}
-                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(p); } }}
+                            onClick={(e) => open(p, e.currentTarget)}
+                            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(p, e.currentTarget); } }}
                             tabIndex={0}
                             role="button"
                             aria-label={`${p.title}: open details`}
@@ -209,10 +225,11 @@ export default function Projects({ onNavigate }) {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            onClick={() => setActive(null)}
+                            onClick={close}
                         >
                             <motion.div
                                 role="dialog"
+                                data-state={modal}
                                 aria-modal="true"
                                 aria-label={active.title}
                                 initial={{ opacity: 0, y: 24, scale: 0.98 }}
@@ -226,7 +243,7 @@ export default function Projects({ onNavigate }) {
                                     <span className="truncate font-mono text-[11px] text-ink4">
                                         ~/projects/<span className="text-accent">{active.links.github.split("/").pop()}</span>/README.md
                                     </span>
-                                    <button onClick={() => setActive(null)} aria-label="Close" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line2 text-ink hover:border-ink">
+                                    <button type="button" ref={closeButton} onClick={close} aria-label="Close" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line2 text-ink hover:border-ink">
                                         <X size={14} />
                                     </button>
                                 </div>

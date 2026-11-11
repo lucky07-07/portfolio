@@ -1,9 +1,9 @@
-import { useState } from "react";
 import SectionHeader from "./SectionHeader";
+import Logo from "./Logo";
 import { devicon } from "../data/logos";
 
 // Logo sources: devicon (jsDelivr) + simple-icons CDN. Any that fail to load
-// fall back to a dot (see SkillTile).
+// fall back to a dot (see Logo).
 const simple = (slug, color) =>
   `https://cdn.simpleicons.org/${slug}${color ? `/${color}` : ""}`;
 
@@ -64,16 +64,13 @@ const groups = [
 
 // Logo + name row; a missing or broken logo falls back to a dot.
 function SkillTile({ name, logo }) {
-  const [errored, setErrored] = useState(false);
-  const showLogo = logo && !errored;
-
   return (
     <li className="group flex items-center gap-3.5 border-t border-line py-3 transition-colors hover:border-ink">
-      {showLogo ? (
-        <img src={logo} alt="" loading="lazy" onError={() => setErrored(true)} className="h-5 w-5 object-contain grayscale-[35%] transition group-hover:grayscale-0" />
-      ) : (
-        <span className="flex h-5 w-5 items-center justify-center"><span className="h-2 w-2 rounded-full bg-accent" /></span>
-      )}
+      <Logo
+        src={logo}
+        className="h-5 w-5 object-contain grayscale-[35%] transition group-hover:grayscale-0"
+        fallback={<span className="flex h-5 w-5 items-center justify-center"><span className="h-2 w-2 rounded-full bg-accent" /></span>}
+      />
       <span className="text-[15px] text-ink2 transition-colors group-hover:text-ink">{name}</span>
     </li>
   );

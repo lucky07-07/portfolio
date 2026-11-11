@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, FileText, ArrowDown } from "lucide-react";
 import { TokenAttention } from "./AttentionViz";
 import AskConsole from "./AskConsole";
+import { useMachine } from "../lib/machine";
+import { typewriter } from "../lib/machines";
 
 const ROLES = [
     "Computer Vision",
@@ -12,25 +14,24 @@ const ROLES = [
     "Multimodal NLP",
 ];
 
-// Types each role, pauses, deletes, moves to the next.
-function useTypewriter(words, speed = 70, pause = 1400) {
-    const [i, setI] = useState(0);
-    const [text, setText] = useState("");
-    const [deleting, setDeleting] = useState(false);
+const ROLE_MACHINE = typewriter(ROLES);
+const ROLE_DELAY = { typing: 70, holding: 1400, deleting: 35 };
+
+// Types each role, holds it, deletes it, moves to the next.
+// With reduced motion the first role is simply shown.
+function useRole() {
+    const reduced = useReducedMotion();
+    const [state, send, ctx] = useMachine(ROLE_MACHINE);
 
     useEffect(() => {
-        const word = words[i % words.length];
-        const done = !deleting && text === word;
-        const cleared = deleting && text === "";
-        const t = setTimeout(() => {
-            if (done) setDeleting(true);
-            else if (cleared) { setDeleting(false); setI((v) => v + 1); }
-            else setText(word.slice(0, text.length + (deleting ? -1 : 1)));
-        }, done ? pause : deleting ? speed / 2 : speed);
+        if (reduced) return;
+        const t = setTimeout(() => send("TICK"), ROLE_DELAY[state]);
         return () => clearTimeout(t);
-    }, [text, deleting, i, words, speed, pause]);
+    }, [state, ctx, reduced, send]);
 
-    return text;
+    return reduced
+        ? { state: "holding", text: ROLES[0] }
+        : { state, text: ROLES[ctx.word].slice(0, ctx.chars) };
 }
 
 // Staggered blur-in used for every hero element.
@@ -41,7 +42,7 @@ const rise = (delay) => ({
 });
 
 export default function Hero({ onNavigate }) {
-    const role = useTypewriter(ROLES);
+    const role = useRole();
 
     return (
         <div className="relative pb-10">
@@ -59,9 +60,9 @@ export default function Hero({ onNavigate }) {
                     </motion.span>
                 </h1>
 
-                <motion.p {...rise(0.45)} className="mt-9 font-mono text-[13.5px] text-ink3">
+                <motion.p {...rise(0.45)} data-state={role.state} className="mt-9 font-mono text-[13.5px] text-ink3">
                     attending to <span className="text-ink4">→</span>{" "}
-                    <span className="text-accent">{role}</span>
+                    <span className="text-accent">{role.text}</span>
                     <span className="ml-0.5 inline-block h-[15px] w-[2px] translate-y-[2px] bg-accent animate-blink" />
                 </motion.p>
 

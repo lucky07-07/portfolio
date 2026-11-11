@@ -1,4 +1,5 @@
 import { profile } from "../data/portfolio";
+import Logo from "./Logo";
 
 // ── Network geometry (SVG viewBox 420 × 340) ───────────────────────────
 const H = 340;
@@ -103,11 +104,11 @@ export default function NetworkDiagram() {
                 }}
             >
                 <div className="absolute inset-0 flex items-center justify-center font-display text-2xl italic text-ink">AK</div>
-                <img
+                <Logo
                     src="/profile.jpg"
                     alt={profile.name}
+                    loading="eager"
                     className="absolute inset-0 h-full w-full object-cover object-top"
-                    onError={(e) => { e.currentTarget.style.display = "none"; }}
                 />
             </div>
         </div>

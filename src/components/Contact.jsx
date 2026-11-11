@@ -1,11 +1,27 @@
-import { useState } from "react";
-import { ArrowUpRight, Mail, Copy, Check, Award } from "lucide-react";
+import { useEffect } from "react";
+import { ArrowUpRight, Mail, Copy, Check, X, Award } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import { GithubMark, LinkedinMark } from "./Icons";
 import { profile } from "../data/portfolio";
+import { useMachine } from "../lib/machine";
+import { clipboard } from "../lib/machines";
+
+const COPY = {
+    idle:   { label: "Copy address", icon: Copy },
+    copied: { label: "Copied", icon: Check },
+    failed: { label: "Couldn\u2019t copy", icon: X },
+};
 
 export default function Contact() {
-    const [copied, setCopied] = useState(false);
+    const [copy, send] = useMachine(clipboard);
+    const CopyIcon = COPY[copy].icon;
+
+    // "Copied" / "Couldn't copy" clears itself after a moment.
+    useEffect(() => {
+        if (copy === "idle") return;
+        const t = setTimeout(() => send("RESET"), 1800);
+        return () => clearTimeout(t);
+    }, [copy, send]);
 
     const contacts = [
         { label: "Email",    value: profile.email,                          href: `mailto:${profile.email}`, icon: Mail },
@@ -17,9 +33,10 @@ export default function Contact() {
     const copyEmail = async () => {
         try {
             await navigator.clipboard.writeText(profile.email);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1600);
-        } catch { /* clipboard unavailable */ }
+            send("COPIED");
+        } catch {
+            send("FAILED");
+        }
     };
 
     return (
@@ -38,9 +55,9 @@ export default function Contact() {
                             imaging, LLMs and agentic systems.
                         </p>
                         <div className="mt-9 flex flex-wrap gap-3">
-                            <button onClick={copyEmail} className="btn-light">
-                                {copied ? <Check size={15} /> : <Copy size={15} />}
-                                {copied ? "Copied" : "Copy address"}
+                            <button type="button" onClick={copyEmail} data-state={copy} className="btn-light">
+                                <CopyIcon size={15} />
+                                <span aria-live="polite">{COPY[copy].label}</span>
                             </button>
                         </div>
                     </div>
