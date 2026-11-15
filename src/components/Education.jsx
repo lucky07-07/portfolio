@@ -28,7 +28,7 @@ export default function Education() {
 
     return (
         <div>
-            <SectionHeader index="07" tag="education" title={<>Education<span className="em">.</span></>} />
+            <SectionHeader index="06" tag="education" title={<>Education<span className="em">.</span></>} />
 
             {/* newest first, like positions in a sequence */}
             <ol className="border-b border-line2">

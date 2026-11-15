@@ -41,7 +41,7 @@ export default function Contact() {
 
     return (
         <div>
-            <SectionHeader index="08" tag="contact" title={<>Let&apos;s build something <span className="em">intelligent.</span></>} />
+            <SectionHeader index="07" tag="contact" title={<>Let&apos;s build something <span className="em">intelligent.</span></>} />
 
             <div className="card-dark overflow-hidden p-7 sm:p-12">
                 <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">

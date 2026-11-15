@@ -80,7 +80,7 @@ export default function Skills() {
   return (
     <div>
       <SectionHeader
-        index="06"
+        index="05"
         tag="stack"
         title={<>Tech <span className="em">stack.</span></>}
         subtitle="The core tools behind the projects, one home per tool, grouped by stage of the ML lifecycle."

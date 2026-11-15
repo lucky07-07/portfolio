@@ -38,7 +38,7 @@ export default function OpenSource() {
     return (
         <div>
             <SectionHeader
-                index="03"
+                index="02"
                 tag="opensource"
                 title={<>Open <span className="em">source.</span></>}
                 subtitle="Pull requests and bug reports on projects I use. Every row links to its thread on GitHub."

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
 import Skills from "./components/Skills";
 import Hackathons from "./components/Hackathons";
 import Projects from "./components/Projects";
@@ -16,7 +15,6 @@ import FieldBackground from "./components/FieldBackground";
 import TrainingHUD from "./components/TrainingHUD";
 
 const NAV_ITEMS = [
-  { name: "About",     id: "about"     },
   { name: "Projects",  id: "projects"  },
   { name: "Open Source", id: "opensource" },
   { name: "Hackathons", id: "hackathons" },
@@ -82,7 +80,6 @@ function App() {
           <Hero onNavigate={scrollTo} />
         </section>
 
-        <Section id="about"><About /></Section>
         <Section id="projects"><Projects /></Section>
         <Section id="opensource"><OpenSource /></Section>
         <Section id="hackathons"><Hackathons /></Section>

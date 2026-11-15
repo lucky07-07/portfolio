@@ -1,10 +1,9 @@
-const TOTAL_BLOCKS = 8;
+const TOTAL_BLOCKS = 7;
 
 // Each section is one block of a transformer forward pass.
 const BLOCK = {
-    about:      "TokenEmbedding",
-    projects:   "MultiHeadAttention",
-    opensource: "ResidualConnection",
+    projects:   "TokenEmbedding",
+    opensource: "MultiHeadAttention",
     hackathons: "FeedForward",
     research:   "CrossAttention",
     stack:      "Add & LayerNorm",

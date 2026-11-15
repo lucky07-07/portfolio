@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const EPOCH_OF = { about: 1, projects: 2, opensource: 3, hackathons: 4, research: 5, skills: 6, education: 7, contact: 8 };
+const EPOCH_OF = { projects: 1, opensource: 2, hackathons: 3, research: 4, skills: 5, education: 6, contact: 7 };
 
 // Synthetic but plausible training curves, parameterised by scroll progress t ∈ [0, 1].
 const lossAt = (t) => 2.3 * Math.exp(-4.2 * t) + 0.04 + 0.025 * Math.sin(t * 40) * (1 - t);
@@ -44,7 +44,7 @@ export default function TrainingHUD({ activeSection }) {
             {/* HUD, desktop only */}
             <div className="fixed bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-5 rounded-full border border-white/10 bg-char/95 px-6 py-2.5 font-mono text-[11px] text-fog shadow-lift backdrop-blur-xl whitespace-nowrap lg:flex">
                 <span>
-                    epoch <span className="text-paper">{epoch}</span>/8
+                    epoch <span className="text-paper">{epoch}</span>/7
                 </span>
 
                 <span>

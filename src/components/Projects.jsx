@@ -114,7 +114,7 @@ export default function Projects() {
     return (
         <div>
             <SectionHeader
-                index="02"
+                index="01"
                 tag="projects"
                 title={<>Selected <span className="em">work.</span></>}
                 subtitle="Research-grade ML projects from my GitHub, each with a reproducible pipeline and a headline metric on held-out data. Click a card for the full write-up."

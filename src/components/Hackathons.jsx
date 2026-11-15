@@ -11,7 +11,7 @@ export default function Hackathons() {
     return (
         <div>
             <SectionHeader
-                index="04"
+                index="03"
                 tag="hackathons"
                 title={<>Hackathons <span className="em">&amp; competitions.</span></>}
                 subtitle="Time-boxed builds against real constraints: tight deadlines, hidden test sets and live users."

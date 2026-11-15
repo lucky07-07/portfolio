@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, FileText, ArrowDown } from "lucide-react";
 import AskConsole from "./AskConsole";
+import { profile } from "../data/portfolio";
 import { useMachine } from "../lib/machine";
 import { typewriter } from "../lib/machines";
 
@@ -47,9 +48,19 @@ export default function Hero({ onNavigate }) {
         <div className="relative pb-10">
             {/* INTRO */}
             <div className="flex min-h-[92vh] flex-col items-center justify-center pb-16 pt-32 text-center">
+                <motion.div {...rise(0)} className="relative mb-8 h-28 w-28 overflow-hidden rounded-full border border-line2 bg-raised shadow-lift sm:h-32 sm:w-32">
+                    <span className="absolute inset-0 flex items-center justify-center font-display text-3xl text-ink3">AK</span>
+                    <img
+                        src="/profile.jpg"
+                        alt={profile.name}
+                        className="absolute inset-0 h-full w-full object-cover object-top"
+                        onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                </motion.div>
+
                 <motion.p {...rise(0.05)} className="inline-flex items-center gap-2.5 rounded-full border border-line2 bg-raised/70 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-ink3 backdrop-blur">
                     <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulseDot" />
-                    M.Tech Data Science · Amrita
+                    M.Tech Data Science · Amrita, Bengaluru
                 </motion.p>
 
                 <h1 className="mt-9 text-[4rem] leading-[0.92] tracking-[-0.02em] sm:text-[6.5rem] lg:text-[8.5rem]">
@@ -68,6 +79,7 @@ export default function Hero({ onNavigate }) {
                 <motion.p {...rise(0.55)} className="mt-6 max-w-[620px] text-[17px] leading-[1.7] text-ink2 sm:text-[18px]">
                     I build models that see, read and reason:
                     LLM-labelled medical imaging, transformer ensembles and self-verifying RAG agents.
+                    I like problems where the data is messy and the evaluation has to be honest.
                 </motion.p>
 
                 <motion.div {...rise(0.65)} className="mt-10 flex flex-wrap justify-center gap-3">
@@ -81,7 +93,7 @@ export default function Hero({ onNavigate }) {
 
                 <motion.button
                     {...rise(0.85)}
-                    onClick={() => onNavigate("about")}
+                    onClick={() => onNavigate("projects")}
                     className="mt-16 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink4 hover:text-accent"
                 >
                     forward pass <ArrowDown size={13} className="animate-bounce" />

@@ -13,7 +13,7 @@ export default function Research() {
     return (
         <div>
             <SectionHeader
-                index="05"
+                index="04"
                 tag="research"
                 title={<>Papers <span className="em">&amp; publications.</span></>}
                 subtitle="Peer-reviewed and in-review work from my research projects."
