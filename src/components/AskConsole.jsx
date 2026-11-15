@@ -8,11 +8,6 @@ import { stream } from "../lib/machines";
 // in a section of the page (the "sources" act like RAG citations).
 const QA = [
     {
-        q: "What do you build?",
-        a: "End-to-end ML systems that go from raw data to a deployed result: medical imaging from multi-series MRI, multimodal NLP such as the first COCO-scale Kannada captioning dataset, and LLM agents that verify their own claims before answering.",
-        sources: [["projects", "projects"], ["about", "about"]],
-    },
-    {
         q: "Best results?",
         a: "Top 3% in the Amazon ML Challenge 2026. 0.906 private AUC on the RSNA knee MRI Kaggle challenge against 6,425 teams. 97.48% accuracy with a transformer ensemble on AgroVision-7.",
         sources: [["hackathons", "hackathons"], ["projects", "projects"]],

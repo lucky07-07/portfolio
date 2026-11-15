@@ -83,7 +83,7 @@ function App() {
         </section>
 
         <Section id="about"><About /></Section>
-        <Section id="projects"><Projects onNavigate={scrollTo} /></Section>
+        <Section id="projects"><Projects /></Section>
         <Section id="opensource"><OpenSource /></Section>
         <Section id="hackathons"><Hackathons /></Section>
         <Section id="research"><Research /></Section>

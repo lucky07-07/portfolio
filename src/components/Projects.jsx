@@ -5,7 +5,8 @@ import { ArrowUpRight, X, FileText, PlayCircle } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import ProjectGlyph from "./ProjectGlyph";
 import { GithubMark } from "./Icons";
-import { projects, categories, contributions } from "../data/portfolio";
+import { projects, categories } from "../data/portfolio";
+import { OPEN_PROJECT } from "../lib/openProject";
 import { useMachine } from "../lib/machine";
 import { dialog } from "../lib/machines";
 
@@ -14,7 +15,6 @@ const CATEGORY_DOT = {
     aiml:       "bg-moss",
     data:       "bg-ochre",
     blockchain: "bg-ink",
-    research:   "bg-indigo",
 };
 
 const categoryLabel = (id) => categories.find((c) => c.id === id)?.label;
@@ -68,7 +68,7 @@ function ProjectLinks({ links, size = 11 }) {
     );
 }
 
-export default function Projects({ onNavigate }) {
+export default function Projects() {
     const [filter, setFilter] = useState("all");
     const [modal, send, { item }] = useMachine(dialog);
     const active = modal === "open" ? item : null;
@@ -82,6 +82,18 @@ export default function Projects({ onNavigate }) {
     const close = () => send("CLOSE");
 
     const visible = filter === "all" ? projects : projects.filter((p) => p.categories.includes(filter));
+
+    // Other sections (e.g. Hackathons) open a project's dialog by title.
+    useEffect(() => {
+        const onOpen = (e) => {
+            const project = projects.find((p) => p.title === e.detail);
+            if (!project) return;
+            opener.current = document.activeElement;
+            send({ type: "OPEN", item: project });
+        };
+        window.addEventListener(OPEN_PROJECT, onOpen);
+        return () => window.removeEventListener(OPEN_PROJECT, onOpen);
+    }, [send]);
 
     useEffect(() => {
         if (!active) return;
@@ -128,13 +140,6 @@ export default function Projects({ onNavigate }) {
                         </button>
                     );
                 })}
-                {/* contributions to other people's projects live in their own section */}
-                <button
-                    onClick={() => onNavigate("opensource")}
-                    className="rounded-full border border-dashed border-line2 px-4 py-2 text-[13px] text-ink2 transition-colors hover:border-ink hover:text-ink"
-                >
-                    Open Source <span className="ml-1 font-mono text-[11px] text-ink4">{contributions.length} ↓</span>
-                </button>
             </div>
 
             <motion.div layout className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">

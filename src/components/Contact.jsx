@@ -47,10 +47,10 @@ export default function Contact() {
                 <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
                     <div>
                         <p className="inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.14em] text-fog">
-                            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulseDot" /> Open to work
+                            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulseDot" /> Available now
                         </p>
                         <p className="mt-6 font-display text-[1.75rem] leading-[1.25] text-fog sm:text-[2.2rem]">
-                            Open to <span className="text-paper">AI/ML engineering roles, internships</span> and{" "}
+                            Looking for <span className="text-paper">AI/ML engineering roles, internships</span> and{" "}
                             <span className="text-paper">research collaborations</span> in computer vision, medical
                             imaging, LLMs and agentic systems.
                         </p>

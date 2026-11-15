@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, FileText, ArrowDown } from "lucide-react";
-import { TokenAttention } from "./AttentionViz";
 import AskConsole from "./AskConsole";
 import { useMachine } from "../lib/machine";
 import { typewriter } from "../lib/machines";
@@ -68,8 +67,7 @@ export default function Hero({ onNavigate }) {
 
                 <motion.p {...rise(0.55)} className="mt-6 max-w-[620px] text-[17px] leading-[1.7] text-ink2 sm:text-[18px]">
                     I build models that see, read and reason:
-                    LLM-labelled medical imaging, transformer ensembles and self-verifying RAG agents,
-                    each evaluated honestly on held-out data.
+                    LLM-labelled medical imaging, transformer ensembles and self-verifying RAG agents.
                 </motion.p>
 
                 <motion.div {...rise(0.65)} className="mt-10 flex flex-wrap justify-center gap-3">
@@ -99,21 +97,6 @@ export default function Hero({ onNavigate }) {
                 className="mx-auto max-w-[880px]"
             >
                 <AskConsole onNavigate={onNavigate} />
-            </motion.div>
-
-            {/* self-attention over a sentence */}
-            <motion.div
-                initial={{ opacity: 0, y: 26 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
-                className="mx-auto mt-5 max-w-[880px] rounded-[22px] border border-line bg-soft/60 px-4 pb-10 pt-6 sm:px-8"
-            >
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <p className="eyebrow">Self-attention · hover a token to set the query</p>
-                    <p className="font-mono text-[11px] text-ink4">Attention(Q, K, V) = softmax(QKᵀ/√d)·V</p>
-                </div>
-                <TokenAttention />
             </motion.div>
         </div>
     );

@@ -21,7 +21,6 @@ export const categories = [
     { id: "dl",         label: "Deep Learning" },
     { id: "data",       label: "Data Science" },
     { id: "blockchain", label: "Blockchain" },
-    { id: "research",   label: "Research" },
 ];
 
 export const projects = [
@@ -74,7 +73,7 @@ export const projects = [
     },
     {
         title: "AgroVision-7",
-        categories: ["dl","research"],
+        categories: ["dl"],
         glyph: "cv",
         highlights: [
             { value: "97.48%", label: "test accuracy" },
@@ -99,7 +98,7 @@ export const projects = [
     },
     {
         title: "KIC-COCO · Kannada Image Captioning",
-        categories: ["dl","research"],
+        categories: ["dl"],
         glyph: "nlp",
         highlights: [
             { value: "250K", label: "captions · 50K images" },
@@ -145,7 +144,7 @@ export const projects = [
     },
     {
         title: "SustainSched · Carbon-Aware K8s Agent",
-        categories: ["aiml","research"],
+        categories: ["aiml"],
         glyph: "agents",
         highlights: [
             { value: "0.917", label: "R² · XGBoost" },
@@ -314,7 +313,9 @@ export const papers = [
     },
 ];
 
-// Hackathons and competitions.
+// Hackathons and competitions. An entry built around a portfolio project names it in
+// `project` (its exact title) and shows only the headline result here; the details
+// live on the project card.
 export const hackathons = [
     {
         event: "Amazon ML Challenge 2026",
@@ -323,63 +324,36 @@ export const hackathons = [
         year: "2026",
         summary:
             "Competed in Amazon's annual ML challenge and finished in the top 3% of the leaderboard.",
-        stats: [
-            { value: "Top 3%", label: "leaderboard" },
-        ],
+        result: { value: "Top 3%", label: "leaderboard" },
         links: [],
     },
     {
-        event: "Gnani AI Great Indian AI Internship Challenge 2026",
+        event: "Gnani AI Great Indian AI Internship Challenge",
         track: "Built entirely on Gnani models · Prisma, Evon, Timbre",
         format: "Challenge",
         year: "2026",
-        project: "Kavach",
-        summary:
-            "A scam-call guardian for elderly Telugu and Hindi speakers: eight agents warn the listener, alert the family, draft the cybercrime complaint and seal the evidence on Bitcoin.",
-        stats: [
-            { value: "22/22", label: "genuine calls left alone" },
-            { value: "9–12 s", label: "Telugu verdict" },
-            { value: "8", label: "agents" },
-        ],
-        links: [
-            { label: "Live site", href: "https://kavach-scam-call-guardian.vercel.app" },
-            { label: "Code", href: `${GH}/kavach-scam-call-guardian` },
-        ],
+        project: "Kavach · Scam-Call Guardian",
+        result: { value: "22/22", label: "genuine calls left alone" },
+        links: [],
     },
     {
-        event: "Razorpay AI Buildathon 2026",
+        event: "Razorpay AI Buildathon",
         track: "Track 02 · AI Risk Manager",
         format: "Buildathon",
         year: "2026",
         project: "COD Return-Risk Scorer",
-        summary:
-            "Built and deployed a cost-sensitive risk scorer that flags cash-on-delivery orders likely to come back undelivered, with SHAP reasons and a plain-English action for the seller.",
-        stats: [
-            { value: "₹29.5K", label: "saved / 10K orders" },
-            { value: "0.806", label: "ROC-AUC" },
-            { value: "live", label: "FastAPI demo" },
-        ],
-        links: [
-            { label: "Live demo", href: "https://cod-return-risk-scorer.onrender.com/" },
-            { label: "Code", href: `${GH}/rto-return-risk-scorer` },
-        ],
+        result: { value: "₹29.5K", label: "saved per 10K orders" },
+        links: [],
     },
     {
         event: "RSNA Knee Abnormality Detection",
-        track: "Kaggle research code competition",
+        track: "Kaggle research code competition · 6,425 teams",
         format: "Competition",
         year: "2026",
         project: "Knee MRI Abnormality Detection",
-        summary:
-            "Detected 12 knee abnormalities from multi-series MRI using LLM-graded multilingual radiology reports as labels, under offline inference and a 9-hour runtime limit.",
-        stats: [
-            { value: "0.906", label: "private AUC" },
-            { value: "6,425", label: "teams" },
-            { value: "15", label: "model ensemble" },
-        ],
+        result: { value: "0.906", label: "private AUC" },
         links: [
             { label: "Competition", href: "https://www.kaggle.com/competitions/rsna-knee-abnormality-detection" },
-            { label: "Code", href: `${GH}/knee-mri-abnormality-detection` },
         ],
     },
 ];

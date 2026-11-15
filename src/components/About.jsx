@@ -26,9 +26,7 @@ export default function About() {
                             multimodal and low-resource NLP, and LLM-powered agents.
                         </p>
                         <p className="text-ink3">
-                            I like problems where the data is messy and the evaluation has to be honest:
-                            labelling multilingual radiology reports with an LLM, building the first
-                            COCO-scale Kannada captioning dataset, or teaching an agent to audit its own claims.
+                            I like problems where the data is messy and the evaluation has to be honest.
                         </p>
                     </div>
                 </div>
